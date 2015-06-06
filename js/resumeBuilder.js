@@ -106,6 +106,54 @@ var projects = {
 	]
 };
 
+if ( bio.skills.length > 0 ) {
+	$('#header').append(HTMLskillsStart);
+	var formattedSkill;
+	for (var skill in bio.skills) {
+		formattedSkill = HTMLskills.replace('%data%', bio.skills[skill]);
+		$('#skills').append(formattedSkill);
+	}
+}
+
+function displayWork(positions) {
+	console.log(work[positions]);
+	for (var job in work[positions] ) { 
+		if (positions === "jobs") {
+			var experienceSpot = '#workExperience';
+		} else {
+			var experienceSpot = '#volunteerExperience';			
+		}
+		$(experienceSpot).append(HTMLworkStart);
+		var formattedEmployer = HTMLworkEmployer.replace('%data%', work[positions][job].employer);
+		var formattedTitle = HTMLworkTitle.replace('%data%', work[positions][job].title);
+		$('.work-entry:last').append(formattedEmployer + formattedTitle);
+		var formattedDates = HTMLworkDates.replace('%data%', work[positions][job].dates);
+		var formattedLocation = HTMLworkLocation.replace('%data%', work[positions][job].location);
+		var formattedDescription = HTMLworkDescription.replace('%data%', work[positions][job].description);
+		$('.work-entry:last').append(formattedDates);
+		$('.work-entry:last').append(formattedLocation);
+		$('.work-entry:last').append(formattedDescription);
+	}
+}
+
+displayWork('jobs');
+displayWork('volunteerPositions');
+/*
+for (var position in work.volunteerPositions ) {
+	$('#volunteerExperience').append(HTMLworkStart);
+	var formattedEmployer = HTMLworkEmployer.replace('%data%', work.volunteerPositions[position].employer);
+	var formattedTitle = HTMLworkTitle.replace('%data%', work.volunteerPositions[position].title);
+	$('.work-entry:last').append(formattedEmployer + formattedTitle);
+	var formattedDates = HTMLworkDates.replace('%data%', work.volunteerPositions[position].dates);
+	var formattedLocation = HTMLworkLocation.replace('%data%', work.volunteerPositions[position].location);
+	var formattedDescription = HTMLworkDescription.replace('%data%', work.volunteerPositions[position].description);
+	$('.work-entry:last').append(formattedDates);
+	$('.work-entry:last').append(formattedLocation);
+	$('.work-entry:last').append(formattedDescription);;
+}
+
+*/
+
 
 /*
 HTMLheaderName = HTMLheaderName.replace('%data%', bio.name);
