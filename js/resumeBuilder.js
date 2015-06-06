@@ -138,21 +138,6 @@ function displayWork(positions) {
 
 displayWork('jobs');
 displayWork('volunteerPositions');
-/*
-for (var position in work.volunteerPositions ) {
-	$('#volunteerExperience').append(HTMLworkStart);
-	var formattedEmployer = HTMLworkEmployer.replace('%data%', work.volunteerPositions[position].employer);
-	var formattedTitle = HTMLworkTitle.replace('%data%', work.volunteerPositions[position].title);
-	$('.work-entry:last').append(formattedEmployer + formattedTitle);
-	var formattedDates = HTMLworkDates.replace('%data%', work.volunteerPositions[position].dates);
-	var formattedLocation = HTMLworkLocation.replace('%data%', work.volunteerPositions[position].location);
-	var formattedDescription = HTMLworkDescription.replace('%data%', work.volunteerPositions[position].description);
-	$('.work-entry:last').append(formattedDates);
-	$('.work-entry:last').append(formattedLocation);
-	$('.work-entry:last').append(formattedDescription);;
-}
-
-*/
 
 
 /*
@@ -169,7 +154,6 @@ HTMLskills = HTMLskills.replace('%data%', bio.skills);
 
 $('#header').prepend(HTMLheaderRole);
 $('#header').prepend(HTMLheaderName);
-$('#topContacts').prepend(HTMLskills);
 $('#topContacts').append(HTMLbioPic);
 $('#topContacts').prepend(HTMLwelcomeMsg);
 $('#topContacts').prepend(HTMLmobile);
@@ -177,6 +161,5 @@ $('#topContacts').prepend(HTMLemail);
 $('#topContacts').prepend(HTMLtwitter);
 $('#topContacts').prepend(HTMLgithub);
 $('#topContacts').prepend(HTMLlocation);
-$('#workExperience').append(work.workTitle);
 $('#education').append(education['name']);
 */
