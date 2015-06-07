@@ -12,7 +12,7 @@ var bio = {
 		"bioPic" : "images/sarah-maris-sq.jpg",
 		"skills" : ["HTML/CSS", "WordPress", "Javascript", "MailChimp", "Facebook", "Twitter", "Small Business Marketing", "Non-profit communications", "Microsoft Office", "Google Apps for Education"]
     };
-/*
+
 var work = {
 	"jobs" : [
 		{
@@ -54,7 +54,7 @@ var work = {
 		}
 	]
 };
-*/
+
 var education = {
 	"schools" : [
 		{
@@ -115,69 +115,37 @@ if ( bio.skills.length > 0 ) {
 	}
 }
 
-function displayWork(positions) {
-	console.log(work[positions]);
-	for (var job in work[positions] ) { 
-		if (positions === "jobs") {
+function displayWork(jobType) {
+	for (var job in work[jobType] ) { 
+		if (jobType === "jobs") {
 			var experienceSpot = '#workExperience';
 		} else {
 			var experienceSpot = '#volunteerExperience';			
 		}
 		$(experienceSpot).append(HTMLworkStart);
-		var formattedEmployer = HTMLworkEmployer.replace('%data%', work[positions][job].employer);
-		var formattedTitle = HTMLworkTitle.replace('%data%', work[positions][job].title);
+		var formattedEmployer = HTMLworkEmployer.replace('%data%', work[jobType][job].employer);
+		var formattedTitle = HTMLworkTitle.replace('%data%', work[jobType][job].title);
 		$('.work-entry:last').append(formattedEmployer + formattedTitle);
-		var formattedDates = HTMLworkDates.replace('%data%', work[positions][job].dates);
-		var formattedLocation = HTMLworkLocation.replace('%data%', work[positions][job].location);
-		var formattedDescription = HTMLworkDescription.replace('%data%', work[positions][job].description);
+		var formattedDates = HTMLworkDates.replace('%data%', work[jobType][job].dates);
+		var formattedLocation = HTMLworkLocation.replace('%data%', work[jobType][job].location);
+		var formattedDescription = HTMLworkDescription.replace('%data%', work[jobType][job].description);
 		$('.work-entry:last').append(formattedDates);
 		$('.work-entry:last').append(formattedLocation);
 		$('.work-entry:last').append(formattedDescription);
 	}
 }
 
-//displayWork('jobs');
-//displayWork('volunteerPositions');
+displayWork('jobs');
+displayWork('volunteerPositions');
 
-var work = {
-  "jobs": [
-    {
-      "employer": "Udacity",
-      "title": "Course Developer",
-      "location": "Mountain View, CA",
-      "dates": "Feb 2014 - Current",
-      "description": "Who moved my cheese cheesy feet cauliflower cheese. Queso taleggio when the cheese comes out everybody's happy airedale ricotta cheese and wine paneer camembert de normandie. Swiss mozzarella cheese slices feta fromage frais airedale swiss cheesecake. Hard cheese blue castello halloumi parmesan say cheese stinking bishop jarlsberg."
-    },
-    {
-      "employer": "LearnBIG",
-      "title": "Software Engineer",
-      "location": "Seattle, WA",
-      "dates": "May 2013 - Jan 2014",
-      "description": "Who moved my cheese cheesy feet cauliflower cheese. Queso taleggio when the cheese comes out everybody's happy airedale ricotta cheese and wine paneer camembert de normandie. Swiss mozzarella cheese slices feta fromage frais airedale swiss cheesecake. Hard cheese blue castello halloumi parmesan say cheese stinking bishop jarlsberg."
-    },
-    {
-      "employer": "LEAD Academy Charter High School",
-      "title": "Science Teacher",
-      "location": "Nashville, TN",
-      "dates": "Jul 2012 - May 2013",
-      "description": "Who moved my cheese cheesy feet cauliflower cheese. Queso taleggio when the cheese comes out everybody's happy airedale ricotta cheese and wine paneer camembert de normandie. Swiss mozzarella cheese slices feta fromage frais airedale swiss cheesecake. Hard cheese blue castello halloumi parmesan say cheese stinking bishop jarlsberg."
-    },
-    {
-      "employer": "Stratford High School",
-      "title": "Science Teacher",
-      "location": "Nashville, TN",
-      "dates": "Jun 2009 - Jun 2012",
-      "description": "Who moved my cheese cheesy feet cauliflower cheese. Queso taleggio when the cheese comes out everybody's happy airedale ricotta cheese and wine paneer camembert de normandie. Swiss mozzarella cheese slices feta fromage frais airedale swiss cheesecake. Hard cheese blue castello halloumi parmesan say cheese stinking bishop jarlsberg."
-    }
-  ]
-};
 
-// Your code goes here! Let me help you get started
 
 function locationizer(work_obj) {
 	var locations = [];
-	for (var job in work_obj.jobs) {
-		locations.push(work_obj.jobs[job].location);		
+	for (var jobType in work_obj ) {
+		for (var job in work_obj[jobType]) {
+			locations.push(work_obj[jobType][job].location);		
+		}
 	}
 	return locations;
 }
