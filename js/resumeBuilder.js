@@ -176,7 +176,7 @@ var work = {
 
 function locationizer(work_obj) {
 	var locations = [];
-	for (job in work_obj.jobs) {
+	for (var job in work_obj.jobs) {
 		locations.push(work_obj.jobs[job].location);		
 	}
 	return locations;
