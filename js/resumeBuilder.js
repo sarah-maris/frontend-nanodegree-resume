@@ -236,3 +236,34 @@ projects.display = function(){
 projects.display();
 
 $('#mapDiv').append(googleMap);
+
+function getRelationship(x,y) {
+	var relationship;
+	if ( isNaN(x)) {
+		if (isNaN(y)) {
+			relationship = "Can't compare relationships because " + x + " and " + y + " are not numbers.";			
+		} else {
+			relationship = "Can't compare relationships because " + x + " is not a number.";	
+		}		
+	} else if (isNaN(y)) {
+			relationship = "Can't compare relationships because " + y + " is not a number.";
+	} else if ( x === y) {
+			relationship = "=";
+	} else if ( x > y) {
+			relationship = ">";
+	} else if ( x < y) {
+			relationship = "<";
+	}		
+	console.log ( "x = " + x );
+	console.log ( "y = " + y );	
+	return relationship;
+
+}
+console.log(getRelationship(1,4));
+console.log(getRelationship(1,1));
+console.log(getRelationship("that",2));
+console.log(getRelationship("this"," something else"));
+console.log(getRelationship(3));
+console.log(getRelationship("hi"));
+console.log(getRelationship(NaN));
+console.log(getRelationship(NaN, undefined));
