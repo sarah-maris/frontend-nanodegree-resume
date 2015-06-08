@@ -88,25 +88,25 @@ var education = {
 };
 
 //Recent projects
-var projects = {
-	"projects" : [
+var projects =  {
+	"projects": [
 		{
 			"title" : "Cozmeena Enlightened Living",
 			"dates" : "2013 - present",
 			"description" : "Developed website and on-line store for the Cozmeena lifestyle brand using WordPress CMS. Project involved creating several custom post types, major re-tooling of the site theme and integration of Woocommerce",
-			"images" : [ "/images/cozmeena/cozmeena-screenshot.png", "/images/cozmeena/cozmeena-hand.jpg", "/images/cozmeena/cozmeena-group.jpg", "/images/cozmeena/pocket-hearts.jpg" ]
+			"images" : [ "images/cozmeena/cozmeena-screenshot.png", "images/cozmeena/cozmeena-hand.jpg", "images/cozmeena/cozmeena-group.jpg", "images/cozmeena/pocket-hearts.jpg" ]
 		},
 		{
 			"title" : "Cups and Cakes Bakery",
 			"dates" : "2014 - 2015",
 			"description" : "Redesigned website using WordPress CMS.  Reformatted pages, added images, redesigned menu and added social media links",
-			"images" : [ "/images/cups/cups-screenshot.png", "/images/cups/juices.jpg", "/images/cups/fruit-tart.jpg", "/images/cozmeena/blueberry-scones.jpg", "/images/cups/birthday.png",   "/images/cups/sweet-potato-bread.jpg"]
+			"images" : [ "images/cups/cups-screenshot.jpg", "images/cups/juices.jpg", "images/cups/fruit-tart.jpg", "images/cups/blueberry-scones.jpg", "images/cups/birthday.png",   "images/cups/sweet-potato-bread.jpg"]
 		},
 		{
 			"title" : "HMF Express",
 			"dates" : "2014 - present",
 			"description" : "Designed new website using WordPres CMS to highlight product customization, product quality and shipping speed.  Incorporated company's quirky personality and commitment to customer service in design",
-			"images" : [ "/images/hmf/hmf-screenshot.png", "/images/hmf/wood-dale.jpg", "/images/cups/welding-table.jpg", "/images/cozmeena/people.jpg", "/images/cups/hinge-welder.jpg"]
+			"images" : [ "images/hmf/hmf-screenshot.png", "images/hmf/wood-dale.jpg", "images/hmf/welding-table.jpg", "images/hmf/people.jpg", "images/hmf/hinge-welder.jpg"]
 		}
 	]
 };
@@ -120,23 +120,33 @@ function displayWork(jobType) {
 		} else {
 			var experienceSpot = '#volunteerExperience';			
 		}
+		// Start job listing
 		$(experienceSpot).append(HTMLworkStart);
+		
+		//Employer and title
 		var formattedEmployer = HTMLworkEmployer.replace('%data%', work[jobType][job].employer);
 		var formattedTitle = HTMLworkTitle.replace('%data%', work[jobType][job].title);
 		$('.work-entry:last').append(formattedEmployer + formattedTitle);
+		
+		// Dates
 		var formattedDates = HTMLworkDates.replace('%data%', work[jobType][job].dates);
-		var formattedLocation = HTMLworkLocation.replace('%data%', work[jobType][job].location);
-		var formattedDescription = HTMLworkDescription.replace('%data%', work[jobType][job].description);
 		$('.work-entry:last').append(formattedDates);
+
+		// Location
+		var formattedLocation = HTMLworkLocation.replace('%data%', work[jobType][job].location);
 		$('.work-entry:last').append(formattedLocation);
+		
+		//Description
+		var formattedDescription = HTMLworkDescription.replace('%data%', work[jobType][job].description);
 		$('.work-entry:last').append(formattedDescription);
 	}
 }
 
+// Display jobs and volunteer positions
 displayWork('jobs');
 displayWork('volunteerPositions');
 
-// locationizer function
+// Create locationizer function
 function locationizer(work_obj) {
 	var locations = [];
 	// Add loop for different job types
@@ -191,3 +201,39 @@ if ( bio.skills.length > 0 ) {
 		$('#skills').append(formattedSkill);
 	}
 }
+
+// function to display projects
+projects.display = function(){
+	for (var project in projects.projects) {
+		$('#projects').append(HTMLprojectStart);
+
+		// Project title
+		var formattedTitle = HTMLprojectTitle.replace('%data%', projects.projects[project].title);
+		$('.project-entry:last').append(formattedTitle);
+		
+		// Project dates
+		var formattedDates = HTMLprojectDates.replace('%data%', projects.projects[project].dates);
+		$('.project-entry:last').append(formattedDates);
+		
+		//Project Description
+		var formattedDescription = HTMLprojectDescription.replace('%data%', projects.projects[project].description);
+		$('.project-entry:last').append(formattedDescription);
+		
+		//Project images 
+		if ( projects.projects[project].images.length > 0 ) {
+			for (var image in projects.projects[project].images) {
+				var formattedImage = HTMLprojectImage.replace('%data%', projects.projects[project].images[image]);
+				$('.project-entry:last').append(formattedImage);
+			}
+		}
+	}
+		
+}
+
+projects.display();
+
+
+$(document).click(function(loc) {
+	console.log(loc.pageX, loc.pageY);
+});
+
