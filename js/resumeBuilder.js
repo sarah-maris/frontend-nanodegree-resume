@@ -183,13 +183,16 @@ HTMLwelcomeMsg = HTMLwelcomeMsg.replace('%data%', bio.welcomeMsg);
 // add bio information to the page
 $('#header').prepend(HTMLheaderRole);
 $('#header').prepend(HTMLheaderName);
+$('#header').append(HTMLbioPic);
+$('#header').append(HTMLwelcomeMsg);
+
 $('#topContacts').prepend(HTMLmobile);
 $('#topContacts').prepend(HTMLemail);
 $('#topContacts').prepend(HTMLtwitter);
 $('#topContacts').prepend(HTMLgithub);
 $('#topContacts').prepend(HTMLlocation);
-$('#topContacts').prepend(HTMLwelcomeMsg);
-$('hr').append(HTMLbioPic);
+
+
 
 
 //Add skills to bio 
@@ -232,8 +235,4 @@ projects.display = function(){
 
 projects.display();
 
-
-$(document).click(function(loc) {
-	console.log(loc.pageX, loc.pageY);
-});
 
