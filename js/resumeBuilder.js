@@ -1,3 +1,4 @@
+// Bio informations 
 var bio = {
 		"name" : "Sarah Maris",
 		"role": "Web Developer",
@@ -12,8 +13,10 @@ var bio = {
 		"bioPic" : "images/sarah-maris-sq.jpg",
 		"skills" : ["HTML/CSS", "WordPress", "Javascript", "MailChimp", "Facebook", "Twitter", "Small Business Marketing", "Non-profit communications", "Microsoft Office", "Google Apps for Education"]
     };
-
+	
+// Jobs and  volunteer work
 var work = {
+	// Add a job type to differentiate between paid and volunteer work
 	"jobs" : [
 		{
 			"employer" : "Sarah's Small Business Solutions",
@@ -55,6 +58,7 @@ var work = {
 	]
 };
 
+//Education
 var education = {
 	"schools" : [
 		{
@@ -83,6 +87,7 @@ var education = {
 	]
 };
 
+//Recent projects
 var projects = {
 	"projects" : [
 		{
@@ -106,17 +111,10 @@ var projects = {
 	]
 };
 
-if ( bio.skills.length > 0 ) {
-	$('#header').append(HTMLskillsStart);
-	var formattedSkill;
-	for (var skill in bio.skills) {
-		formattedSkill = HTMLskills.replace('%data%', bio.skills[skill]);
-		$('#skills').append(formattedSkill);
-	}
-}
-
+// Display work function for different job types
 function displayWork(jobType) {
 	for (var job in work[jobType] ) { 
+		// Change location of append for different job types
 		if (jobType === "jobs") {
 			var experienceSpot = '#workExperience';
 		} else {
@@ -138,10 +136,10 @@ function displayWork(jobType) {
 displayWork('jobs');
 displayWork('volunteerPositions');
 
-
-
+// locationizer function
 function locationizer(work_obj) {
 	var locations = [];
+	// Add loop for different job types
 	for (var jobType in work_obj ) {
 		for (var job in work_obj[jobType]) {
 			locations.push(work_obj[jobType][job].location);		
@@ -150,12 +148,18 @@ function locationizer(work_obj) {
 	return locations;
 }
 
-// Did locationizer() work? This line will tell you!
-console.log(locationizer(work));
+// Add button to internationalize name
+$('#main').append(internationalizeButton);
 
+//inName function (coverts name to International FORMAT)
+function inName(name) {
+	var splitName = name.trim().split(" ");
+	var firstName = splitName[0].slice(0,1).toUpperCase() + splitName[0].slice(1).toLowerCase();
+	var lastName = splitName[1].toUpperCase();
+	return (firstName + " " + lastName);	
+}
 
-
-/*
+// set up bio information 
 HTMLheaderName = HTMLheaderName.replace('%data%', bio.name);
 HTMLheaderRole = HTMLheaderRole.replace('%data%', bio.role);
 HTMLmobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
@@ -165,16 +169,25 @@ HTMLgithub = HTMLgithub.replace('%data%', bio.contacts.github);
 HTMLlocation = HTMLlocation.replace('%data%', bio.contacts.location);
 HTMLbioPic = HTMLbioPic.replace('%data%', bio.bioPic);
 HTMLwelcomeMsg = HTMLwelcomeMsg.replace('%data%', bio.welcomeMsg);
-HTMLskills = HTMLskills.replace('%data%', bio.skills);
 
+// add bio information to the page
 $('#header').prepend(HTMLheaderRole);
 $('#header').prepend(HTMLheaderName);
-$('#topContacts').append(HTMLbioPic);
-$('#topContacts').prepend(HTMLwelcomeMsg);
 $('#topContacts').prepend(HTMLmobile);
 $('#topContacts').prepend(HTMLemail);
 $('#topContacts').prepend(HTMLtwitter);
 $('#topContacts').prepend(HTMLgithub);
 $('#topContacts').prepend(HTMLlocation);
-$('#education').append(education['name']);
-*/
+$('#topContacts').prepend(HTMLwelcomeMsg);
+$('hr').append(HTMLbioPic);
+
+
+//Add skills to bio 
+if ( bio.skills.length > 0 ) {
+	$('#header').append(HTMLskillsStart);
+	var formattedSkill;
+	for (var skill in bio.skills) {
+		formattedSkill = HTMLskills.replace('%data%', bio.skills[skill]);
+		$('#skills').append(formattedSkill);
+	}
+}
