@@ -237,6 +237,9 @@ projects.display();
 
 $('#mapDiv').append(googleMap);
 
+// Problem set #2
+
+// Problem 1
 function getRelationship(x,y) {
 	var relationship;
 	if ( isNaN(x)) {
@@ -267,3 +270,24 @@ console.log(getRelationship(3));
 console.log(getRelationship("hi"));
 console.log(getRelationship(NaN));
 console.log(getRelationship(NaN, undefined));
+
+// Problem 2
+
+var names = ["Neil Armstrong", "Buzz Aldrin", "Pete Conrad", "Alan Bean", "Alan Shepard", "Edgar Mitchell", "David Scott", "James Irwin", "John W Young", "Charles Duke", "Eugene Cernan", "Harrison Schmitt"];
+
+function alphabetizer(names) {
+	var newNames = [];
+	for ( var name in names) {
+		names[name] = names[name].split(" ");
+		if ( names[name].length === 3 ) {
+			newName = names[name][2] + ", " + names[name][0] + " " + names[name][1];			
+		} else {
+			newName = names[name][1] + ", " + names[name][0];		
+		}
+		newNames.push( newName);
+	}
+	newNames.sort();
+	return newNames;
+}
+
+console.log(alphabetizer(names) );
