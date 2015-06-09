@@ -4,7 +4,7 @@
 var bio = {
 		"name" : "Sarah Maris",
 		"role": "Web Developer",
-		"welcomeMsg" : "My focus is on helping small businesses and non-profit organizations make the most of the free or near-free marketing and promotional tools available on the web.  I also provide training to help new or infrequent computer users and technophobes get the most out of their devices.",
+		"welcomeMsg" : "I help small businesses and non-profit organizations make intelligent use of technology and access the free and inexpensive and promotional tools available on the web.  I also provide training to help infrequent computer users and technophobes.",
 		"contacts" : {
 			"mobile" : "908-902-8430",
 			"email" : "sarah@sarahmaris.com",
@@ -13,7 +13,7 @@ var bio = {
 			"location" : "Fair Haven, NJ"
 		},
 		"bioPic" : "images/sarah-maris-sq.jpg",
-		"skills" : ["HTML/CSS", "WordPress", "Javascript", "MailChimp", "Facebook", "Twitter", "Small Business Marketing", "Non-profit communications", "Microsoft Office", "Google Apps for Education"]
+		"skills" : ["HTML/CSS", "WordPress", "Javascript", "MailChimp", "Facebook", "Twitter", "Small Business Marketing", "Non-profit Communications", "Microsoft Office", "Google Apps for Education"]
     };
 
 // Jobs and  volunteer work
