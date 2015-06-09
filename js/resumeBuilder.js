@@ -1,3 +1,5 @@
+/* INPUT DATA */
+
 // Bio and contact information
 var bio = {
 		"name" : "Sarah Maris",
@@ -13,7 +15,7 @@ var bio = {
 		"bioPic" : "images/sarah-maris-sq.jpg",
 		"skills" : ["HTML/CSS", "WordPress", "Javascript", "MailChimp", "Facebook", "Twitter", "Small Business Marketing", "Non-profit communications", "Microsoft Office", "Google Apps for Education"]
     };
-	
+
 // Jobs and  volunteer work
 var work = {
 	// Add  job type to differentiate between paid and volunteer work
@@ -58,6 +60,30 @@ var work = {
 	]
 };
 
+//Recent projects
+var projects =  {
+	"projects": [
+		{
+			"title" : "Cozmeena Enlightened Living",
+			"dates" : "2013 - present",
+			"description" : "Developed website and on-line store for the Cozmeena lifestyle brand using WordPress CMS. Project involved creating several custom post types, major re-tooling of the site theme and integration of Woocommerce",
+			"images" : [ "images/cozmeena/cozmeena-screenshot.png", "images/cozmeena/cozmeena-hand.jpg", "images/cozmeena/cozmeena-group.jpg", "images/cozmeena/pocket-hearts.jpg" ]
+		},
+		{
+			"title" : "Cups and Cakes Bakery",
+			"dates" : "2014 - 2015",
+			"description" : "Redesigned website using WordPress CMS.  Reformatted pages, added images, redesigned menu and added social media links",
+			"images" : [ "images/cups/cups-screenshot.jpg", "images/cups/juices.jpg", "images/cups/fruit-tart.jpg", "images/cups/blueberry-scones.jpg", "images/cups/birthday.png",   "images/cups/sweet-potato-bread.jpg"]
+		},
+		{
+			"title" : "HMF Express",
+			"dates" : "2014 - present",
+			"description" : "Designed new website using WordPres CMS to highlight product customization, product quality and shipping speed.  Incorporated company's quirky personality and commitment to customer service in design",
+			"images" : [ "images/hmf/hmf-screenshot.png", "images/hmf/wood-dale.jpg", "images/hmf/welding-table.jpg", "images/hmf/people.jpg", "images/hmf/hinge-welder.jpg"]
+		}
+	]
+};
+
 //Education
 var education = {
 	"schools" : [
@@ -88,115 +114,35 @@ var education = {
 	]
 };
 
-//Recent projects
-var projects =  {
-	"projects": [
-		{
-			"title" : "Cozmeena Enlightened Living",
-			"dates" : "2013 - present",
-			"description" : "Developed website and on-line store for the Cozmeena lifestyle brand using WordPress CMS. Project involved creating several custom post types, major re-tooling of the site theme and integration of Woocommerce",
-			"images" : [ "images/cozmeena/cozmeena-screenshot.png", "images/cozmeena/cozmeena-hand.jpg", "images/cozmeena/cozmeena-group.jpg", "images/cozmeena/pocket-hearts.jpg" ]
-		},
-		{
-			"title" : "Cups and Cakes Bakery",
-			"dates" : "2014 - 2015",
-			"description" : "Redesigned website using WordPress CMS.  Reformatted pages, added images, redesigned menu and added social media links",
-			"images" : [ "images/cups/cups-screenshot.jpg", "images/cups/juices.jpg", "images/cups/fruit-tart.jpg", "images/cups/blueberry-scones.jpg", "images/cups/birthday.png",   "images/cups/sweet-potato-bread.jpg"]
-		},
-		{
-			"title" : "HMF Express",
-			"dates" : "2014 - present",
-			"description" : "Designed new website using WordPres CMS to highlight product customization, product quality and shipping speed.  Incorporated company's quirky personality and commitment to customer service in design",
-			"images" : [ "images/hmf/hmf-screenshot.png", "images/hmf/wood-dale.jpg", "images/hmf/welding-table.jpg", "images/hmf/people.jpg", "images/hmf/hinge-welder.jpg"]
-		}
-	]
-};
+/* FUNCTIONS */
 
-// Display work function for different job types
-work.display = function(jobType) {
-	for (var job in work[jobType] ) { 
-		// Change location of append for different job types
-		if (jobType === "jobs") {
-			var experienceSpot = '#workExperience';
-		} else {
-			var experienceSpot = '#volunteerExperience';			
-		}
-		// Start job listing
-		$(experienceSpot).append(HTMLworkStart);
-		
-		//Employer and title
-		var formattedEmployer = HTMLworkEmployer.replace('%data%', work[jobType][job].employer);
-		var formattedTitle = HTMLworkTitle.replace('%data%', work[jobType][job].title);
-		$('.work-entry:last').append(formattedEmployer + formattedTitle);
-		
-		// Dates
-		var formattedDates = HTMLworkDates.replace('%data%', work[jobType][job].dates);
-		$('.work-entry:last').append(formattedDates);
-
-		// Location
-		var formattedLocation = HTMLworkLocation.replace('%data%', work[jobType][job].location);
-		$('.work-entry:last').append(formattedLocation);
-		
-		//Description
-		var formattedDescription = HTMLworkDescription.replace('%data%', work[jobType][job].description);
-		$('.work-entry:last').append(formattedDescription);
-	}
-}
-
-// Display jobs and volunteer positions
-work.display("jobs");
-work.display("volunteerPositions");
-
-// Create locationizer function
-function locationizer(work_obj) {
-	var locations = [];
-	// Add loop for different job types
-	for (var jobType in work_obj ) {
-		for (var job in work_obj[jobType]) {
-			locations.push(work_obj[jobType][job].location);		
-		}
-	}
-	return locations;
-}
-
-// Add button to internationalize name
-$('#main').append(internationalizeButton);
-
-//inName function (converts name to International FORMAT)
-function inName(name) {
-	var splitName = name.trim().split(" ");
-	var firstName = splitName[0].slice(0,1).toUpperCase() + splitName[0].slice(1).toLowerCase();
-	var lastName = splitName[1].toUpperCase();
-	return (firstName + " " + lastName);	
-}
-
-// function to display bio information 
+// Function to display bio information in header and footer
 bio.display = function() {
-	// Add name and role to header 
-	HTMLheaderRole = HTMLheaderRole.replace('%data%', bio.role);
-	$('#header').prepend(HTMLheaderRole);
-	HTMLheaderName = HTMLheaderName.replace('%data%', bio.name);
-	$('#header').prepend(HTMLheaderName);
-	
-	//Add contact info to contacts section of header
-	HTMLmobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
-	$('#topContacts').prepend(HTMLmobile);
-	HTMLemail = HTMLemail.replace('%data%', bio.contacts.email);
-	$('#topContacts').prepend(HTMLemail);
-	HTMLtwitter = HTMLtwitter.replace('%data%', bio.contacts.twitter);
-	$('#topContacts').prepend(HTMLtwitter);
-	HTMLgithub = HTMLgithub.replace('%data%', bio.contacts.github);
-	$('#topContacts').prepend(HTMLgithub);
-	HTMLlocation = HTMLlocation.replace('%data%', bio.contacts.location);
-	$('#topContacts').prepend(HTMLlocation);
-	
-	// Add picture and welcome message to header
-	HTMLbioPic = HTMLbioPic.replace('%data%', bio.bioPic);
-	$('#header').append(HTMLbioPic);
-	HTMLwelcomeMsg = HTMLwelcomeMsg.replace('%data%', bio.welcomeMsg);
-	$('#header').append(HTMLwelcomeMsg);
+	// Add name and role to header
+	var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
+	$('#header').prepend(formattedRole);
+	var formattedName = HTMLheaderName.replace('%data%', bio.name);
+	$('#header').prepend(formattedName);
 
-	//Add skills to header 
+	//Add contact info to contacts section of header
+	var formattedMobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
+	$('#topContacts').prepend(formattedMobile);
+	var formattedEmail = HTMLemail.replace('%data%', bio.contacts.email);
+	$('#topContacts').prepend(formattedEmail);
+	var formattedTwitter = HTMLtwitter.replace('%data%', bio.contacts.twitter);
+	$('#topContacts').prepend(formattedTwitter);
+	var formattedGithub = HTMLgithub.replace('%data%', bio.contacts.github);
+	$('#topContacts').prepend(formattedGithub);
+	var formattedLocation = HTMLlocation.replace('%data%', bio.contacts.location);
+	$('#topContacts').prepend(formattedLocation);
+
+	// Add picture and welcome message to header
+	var formatteedBioPic = HTMLbioPic.replace('%data%', bio.bioPic);
+	$('#header').append(formatteedBioPic);
+	var formattedWelcomeMsg = HTMLwelcomeMsg.replace('%data%', bio.welcomeMsg);
+	$('#header').append(formattedWelcomeMsg);
+
+	//Add skills to header
 	if ( bio.skills.length > 0 ) {
 		$('#header').append(HTMLskillsStart);
 		var formattedSkill;
@@ -205,7 +151,7 @@ bio.display = function() {
 			$('#skills').append(formattedSkill);
 		}
 	}
-	
+
 	//Add contact info to contacts section of footer
 	HTMLmobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
 	$('#footerContacts').prepend(HTMLmobile);
@@ -219,9 +165,39 @@ bio.display = function() {
 	$('#footerContacts').prepend(HTMLlocation);
 }
 
-bio.display();
+// Function to display work experience (adapted to show both paid and volunteer jobs)
+work.display = function(jobType) {
+	for (var job in work[jobType] ) {
+		// Change location of append for different job types
+		var experienceSpot;
+		if (jobType === "jobs") {
+			experienceSpot = '#workExperience';
+		} else {
+			experienceSpot = '#volunteerExperience';
+		}
+		// Start job listing
+		$(experienceSpot).append(HTMLworkStart);
 
-// function to display projects
+		//Employer and title
+		var formattedEmployer = HTMLworkEmployer.replace('%data%', work[jobType][job].employer);
+		var formattedTitle = HTMLworkTitle.replace('%data%', work[jobType][job].title);
+		$('.work-entry:last').append(formattedEmployer + formattedTitle);
+
+		// Dates
+		var formattedDates = HTMLworkDates.replace('%data%', work[jobType][job].dates);
+		$('.work-entry:last').append(formattedDates);
+
+		// Location
+		var formattedLocation = HTMLworkLocation.replace('%data%', work[jobType][job].location);
+		$('.work-entry:last').append(formattedLocation);
+
+		//Description
+		var formattedDescription = HTMLworkDescription.replace('%data%', work[jobType][job].description);
+		$('.work-entry:last').append(formattedDescription);
+	}
+}
+
+// Function to display projects
 projects.display = function(){
 	for (var project in projects.projects) {
 		$('#projects').append(HTMLprojectStart);
@@ -229,16 +205,16 @@ projects.display = function(){
 		// Project title
 		var formattedTitle = HTMLprojectTitle.replace('%data%', projects.projects[project].title);
 		$('.project-entry:last').append(formattedTitle);
-		
+
 		// Project dates
 		var formattedDates = HTMLprojectDates.replace('%data%', projects.projects[project].dates);
 		$('.project-entry:last').append(formattedDates);
-		
+
 		//Project Description
 		var formattedDescription = HTMLprojectDescription.replace('%data%', projects.projects[project].description);
 		$('.project-entry:last').append(formattedDescription);
-		
-		//Project images 
+
+		//Project images
 		if ( projects.projects[project].images.length > 0 ) {
 			for (var image in projects.projects[project].images) {
 				var formattedImage = HTMLprojectImage.replace('%data%', projects.projects[project].images[image]);
@@ -246,17 +222,15 @@ projects.display = function(){
 			}
 		}
 	}
-		
+
 }
 
-projects.display();
-
-// function to display education
+// Function to display formal education
 education.displaySchools = function(){
 	for (var school in education.schools) {
 		//Start school section
 		$('#education').append(HTMLschoolStart);
-		
+
 		//Add name and degree
 		var formattedName = HTMLschoolName.replace('%data%', education.schools[school].name);
 		var formattedDegree = HTMLschoolDegree.replace('%data%', education.schools[school].degree);
@@ -268,20 +242,20 @@ education.displaySchools = function(){
 		var formattedLocation = HTMLschoolLocation.replace('%data%', education.schools[school].location);
 		$('.education-entry:last').append(formattedLocation);
 		var formattedMajor = HTMLschoolMajor.replace('%data%', education.schools[school].majors);
-		$('.education-entry:last').append(formattedMajor);	
-	}	
+		$('.education-entry:last').append(formattedMajor);
+	}
 }
 
-// function to display online courses
+// Function to display online coursework
 education.displayOnline = function(){
-	// Add section header 
-	$('#education').append(HTMLonlineClasses);  
-	
+	// Add section header
+	$('#education').append(HTMLonlineClasses);
+
 	for (var course in education.onlineCourses) {
-		
+
 		//Start online course section
 		$('#education').append(HTMLschoolStart);
-		
+
 		//Add name and degree
 		var formattedTitle = HTMLonlineTitle.replace('%data%', education.onlineCourses[course].title);
 		var formattedSchool = HTMLonlineSchool.replace('%data%', education.onlineCourses[course].school);
@@ -292,12 +266,50 @@ education.displayOnline = function(){
 		$('.education-entry:last').append(formattedDates);
 		var formattedLocation = HTMLonlineURL.replace('%data%', education.onlineCourses[course].url);
 		$('.education-entry:last').append(formattedLocation);
-	}	
+	}
 }
 
+// Function to pull locations from work and education data
+function locationizer(work_obj) {
+	var locations = [];
+	// Add loop for different job types
+	for (var jobType in work_obj ) {
+		for (var job in work_obj[jobType]) {
+			locations.push(work_obj[jobType][job].location);
+		}
+	}
+	return locations;
+}
 
+// Function to convert name to International FORMAT)
+function inName(name) {
+	var splitName = name.trim().split(" ");
+	var firstName = splitName[0].slice(0,1).toUpperCase() + splitName[0].slice(1).toLowerCase();
+	var lastName = splitName[1].toUpperCase();
+	return (firstName + " " + lastName);
+}
+
+/* DISPLAY INFO ON PAGE */
+
+// Display bio information in header and footer
+bio.display();
+
+// Display jobs and volunteer positions
+work.display("jobs");
+work.display("volunteerPositions");
+
+// Display projects
+projects.display();
+
+// Display formal education and online coursework
 education.displaySchools();
 education.displayOnline();
 
-
+// Display Google Map
 $('#mapDiv').append(googleMap);
+
+// Add button to internationalize name
+$('#main').append(internationalizeButton);
+
+// TO DO 
+/* add lightbox to projects: http://lokeshdhakar.com/projects/lightbox2/ */
