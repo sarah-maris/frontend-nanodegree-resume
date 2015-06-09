@@ -1,8 +1,8 @@
-// Bio informations 
+// Bio and contact information
 var bio = {
 		"name" : "Sarah Maris",
 		"role": "Web Developer",
-		"welcomeMsg" : "I am a Web Developer focused on helping small businesses and non-profit organizations make the most of the free or near-free marketing and promotional tools available on the web.  I also provide training to help new or infrequent computer users and technophobes get the most out of their devices.",
+		"welcomeMsg" : "My focus is on helping small businesses and non-profit organizations make the most of the free or near-free marketing and promotional tools available on the web.  I also provide training to help new or infrequent computer users and technophobes get the most out of their devices.",
 		"contacts" : {
 			"mobile" : "908-902-8430",
 			"email" : "sarah@sarahmaris.com",
@@ -16,7 +16,7 @@ var bio = {
 	
 // Jobs and  volunteer work
 var work = {
-	// Add a job type to differentiate between paid and volunteer work
+	// Add  job type to differentiate between paid and volunteer work
 	"jobs" : [
 		{
 			"employer" : "Sarah's Small Business Solutions",
@@ -65,6 +65,7 @@ var education = {
 			"name" : "Stanford University",
 			"location" : "Stanford, CA",
 			"degree" : "MBA",
+			"majors" : ["Marketing, Finance"],
 			"dates" : "1987-89",
 			"url" : "http://www.gsb.stanford.edu/"
 		},
@@ -112,7 +113,7 @@ var projects =  {
 };
 
 // Display work function for different job types
-function displayWork(jobType) {
+work.display = function(jobType) {
 	for (var job in work[jobType] ) { 
 		// Change location of append for different job types
 		if (jobType === "jobs") {
@@ -143,8 +144,8 @@ function displayWork(jobType) {
 }
 
 // Display jobs and volunteer positions
-displayWork('jobs');
-displayWork('volunteerPositions');
+work.display("jobs");
+work.display("volunteerPositions");
 
 // Create locationizer function
 function locationizer(work_obj) {
@@ -161,7 +162,7 @@ function locationizer(work_obj) {
 // Add button to internationalize name
 $('#main').append(internationalizeButton);
 
-//inName function (coverts name to International FORMAT)
+//inName function (converts name to International FORMAT)
 function inName(name) {
 	var splitName = name.trim().split(" ");
 	var firstName = splitName[0].slice(0,1).toUpperCase() + splitName[0].slice(1).toLowerCase();
@@ -169,41 +170,56 @@ function inName(name) {
 	return (firstName + " " + lastName);	
 }
 
-// set up bio information 
-HTMLheaderName = HTMLheaderName.replace('%data%', bio.name);
-HTMLheaderRole = HTMLheaderRole.replace('%data%', bio.role);
-HTMLmobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
-HTMLemail = HTMLemail.replace('%data%', bio.contacts.email);
-HTMLtwitter = HTMLtwitter.replace('%data%', bio.contacts.twitter);
-HTMLgithub = HTMLgithub.replace('%data%', bio.contacts.github);
-HTMLlocation = HTMLlocation.replace('%data%', bio.contacts.location);
-HTMLbioPic = HTMLbioPic.replace('%data%', bio.bioPic);
-HTMLwelcomeMsg = HTMLwelcomeMsg.replace('%data%', bio.welcomeMsg);
+// function to display bio information 
+bio.display = function() {
+	// Add name and role to header 
+	HTMLheaderRole = HTMLheaderRole.replace('%data%', bio.role);
+	$('#header').prepend(HTMLheaderRole);
+	HTMLheaderName = HTMLheaderName.replace('%data%', bio.name);
+	$('#header').prepend(HTMLheaderName);
+	
+	//Add contact info to contacts section of header
+	HTMLmobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
+	$('#topContacts').prepend(HTMLmobile);
+	HTMLemail = HTMLemail.replace('%data%', bio.contacts.email);
+	$('#topContacts').prepend(HTMLemail);
+	HTMLtwitter = HTMLtwitter.replace('%data%', bio.contacts.twitter);
+	$('#topContacts').prepend(HTMLtwitter);
+	HTMLgithub = HTMLgithub.replace('%data%', bio.contacts.github);
+	$('#topContacts').prepend(HTMLgithub);
+	HTMLlocation = HTMLlocation.replace('%data%', bio.contacts.location);
+	$('#topContacts').prepend(HTMLlocation);
+	
+	// Add picture and welcome message to header
+	HTMLbioPic = HTMLbioPic.replace('%data%', bio.bioPic);
+	$('#header').append(HTMLbioPic);
+	HTMLwelcomeMsg = HTMLwelcomeMsg.replace('%data%', bio.welcomeMsg);
+	$('#header').append(HTMLwelcomeMsg);
 
-// add bio information to the page
-$('#header').prepend(HTMLheaderRole);
-$('#header').prepend(HTMLheaderName);
-$('#header').append(HTMLbioPic);
-$('#header').append(HTMLwelcomeMsg);
-
-$('#topContacts').prepend(HTMLmobile);
-$('#topContacts').prepend(HTMLemail);
-$('#topContacts').prepend(HTMLtwitter);
-$('#topContacts').prepend(HTMLgithub);
-$('#topContacts').prepend(HTMLlocation);
-
-
-
-
-//Add skills to bio 
-if ( bio.skills.length > 0 ) {
-	$('#header').append(HTMLskillsStart);
-	var formattedSkill;
-	for (var skill in bio.skills) {
-		formattedSkill = HTMLskills.replace('%data%', bio.skills[skill]);
-		$('#skills').append(formattedSkill);
+	//Add skills to header 
+	if ( bio.skills.length > 0 ) {
+		$('#header').append(HTMLskillsStart);
+		var formattedSkill;
+		for (var skill in bio.skills) {
+			formattedSkill = HTMLskills.replace('%data%', bio.skills[skill]);
+			$('#skills').append(formattedSkill);
+		}
 	}
+	
+	//Add contact info to contacts section of footer
+	HTMLmobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
+	$('#footerContacts').prepend(HTMLmobile);
+	HTMLemail = HTMLemail.replace('%data%', bio.contacts.email);
+	$('#footerContacts').prepend(HTMLemail);
+	HTMLtwitter = HTMLtwitter.replace('%data%', bio.contacts.twitter);
+	$('#footerContacts').prepend(HTMLtwitter);
+	HTMLgithub = HTMLgithub.replace('%data%', bio.contacts.github);
+	$('#footerContacts').prepend(HTMLgithub);
+	HTMLlocation = HTMLlocation.replace('%data%', bio.contacts.location);
+	$('#footerContacts').prepend(HTMLlocation);
 }
+
+bio.display();
 
 // function to display projects
 projects.display = function(){
@@ -234,5 +250,54 @@ projects.display = function(){
 }
 
 projects.display();
+
+// function to display education
+education.displaySchools = function(){
+	for (var school in education.schools) {
+		//Start school section
+		$('#education').append(HTMLschoolStart);
+		
+		//Add name and degree
+		var formattedName = HTMLschoolName.replace('%data%', education.schools[school].name);
+		var formattedDegree = HTMLschoolDegree.replace('%data%', education.schools[school].degree);
+		$('.education-entry:last').append(formattedName + formattedDegree);
+
+		//Add dates, location and major
+		var formattedDates = HTMLschoolDates.replace('%data%', education.schools[school].dates);
+		$('.education-entry:last').append(formattedDates);
+		var formattedLocation = HTMLschoolLocation.replace('%data%', education.schools[school].location);
+		$('.education-entry:last').append(formattedLocation);
+		var formattedMajor = HTMLschoolMajor.replace('%data%', education.schools[school].majors);
+		$('.education-entry:last').append(formattedMajor);	
+	}	
+}
+
+// function to display online courses
+education.displayOnline = function(){
+	// Add section header 
+	$('#education').append(HTMLonlineClasses);  
+	
+	for (var course in education.onlineCourses) {
+		
+		//Start online course section
+		$('#education').append(HTMLschoolStart);
+		
+		//Add name and degree
+		var formattedTitle = HTMLonlineTitle.replace('%data%', education.onlineCourses[course].title);
+		var formattedSchool = HTMLonlineSchool.replace('%data%', education.onlineCourses[course].school);
+		$('.education-entry:last').append(formattedTitle + formattedSchool);
+
+		//Add dates, location and major
+		var formattedDates = HTMLonlineDates.replace('%data%', education.onlineCourses[course].dates);
+		$('.education-entry:last').append(formattedDates);
+		var formattedLocation = HTMLonlineURL.replace('%data%', education.onlineCourses[course].url);
+		$('.education-entry:last').append(formattedLocation);
+	}	
+}
+
+
+education.displaySchools();
+education.displayOnline();
+
 
 $('#mapDiv').append(googleMap);
