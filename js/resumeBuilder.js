@@ -13,6 +13,7 @@ var bio = {
 			"location" : "Fair Haven, NJ"
 		},
 		"bioPic" : "images/sarah-maris-sq.jpg",
+		"bioPic2X": "images/sarah-maris.jpg",
 		"skills" : ["HTML/CSS", "WordPress", "Javascript", "MailChimp", "Facebook", "Twitter", "Small Business Marketing", "Non-profit Communications", "Microsoft Office", "Google Apps for Education"]
     };
 
