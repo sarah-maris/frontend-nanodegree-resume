@@ -12,8 +12,8 @@ var bio = {
 			"github" : "sarah-maris",
 			"location" : "Fair Haven, NJ"
 		},
-		"bioPic" : "images/sarah-maris-sq.jpg",
-		"bioPic2X": "images/sarah-maris.jpg",
+		"bioPic" : "images/bio/sarah-maris-200_1x.jpg",
+		"bioPic2X": "images/bio/sarah-maris-400_2x.jpg",
 		"skills" : ["HTML/CSS", "WordPress", "Javascript", "MailChimp", "Facebook", "Twitter", "Small Business Marketing", "Non-profit Communications", "Microsoft Office", "Google Apps for Education"]
     };
 
@@ -123,13 +123,13 @@ var education = {
 
 // Function to display bio information in header and footer
 bio.display = function() {
-	// Add name and role to header
+	// Name and role to header
 	var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
 	$('#header').prepend(formattedRole);
 	var formattedName = HTMLheaderName.replace('%data%', bio.name);
 	$('#header').prepend(formattedName);
 
-	//Add contact info to contacts section of header
+	//Contact info for header
 	var formattedMobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
 	$('#topContacts').prepend(formattedMobile);
 	var formattedEmail = HTMLemail.replace('%data%', bio.contacts.email);
@@ -141,13 +141,18 @@ bio.display = function() {
 	var formattedLocation = HTMLlocation.replace('%data%', bio.contacts.location);
 	$('#topContacts').prepend(formattedLocation);
 
-	// Add picture and welcome message to header
+	// Bio Picture
 	var formatteedBioPic = HTMLbioPic.replace('%data%', bio.bioPic);
 	$('#header').append(formatteedBioPic);
+	var formattedBioPicX = HTMLbioPicX.replace('%data1%', bio.bioPic);
+	// 2x Picture
+	formattedBioPicX = formattedBioPicX.replace('%data2%', bio.bioPic2X);
+	$(formattedBioPicX).insertBefore('.biopic');
+	// Welcome message header
 	var formattedWelcomeMsg = HTMLwelcomeMsg.replace('%data%', bio.welcomeMsg);
 	$('#header').append(formattedWelcomeMsg);
 
-	//Add skills to header
+	//Skills
 	if ( bio.skills.length > 0 ) {
 		$('#header').append(HTMLskillsStart);
 		var formattedSkill;
@@ -157,7 +162,7 @@ bio.display = function() {
 		}
 	}
 
-	//Add contact info to contacts section of footer
+	//Contact info for footer
 	HTMLmobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
 	$('#footerContacts').prepend(HTMLmobile);
 	HTMLemail = HTMLemail.replace('%data%', bio.contacts.email);
