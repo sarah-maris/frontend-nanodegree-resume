@@ -95,8 +95,9 @@ a {
   display: block;
 }
 
-.title:hover {
+a:hover  {
   color: #858fb2;
+  text-decoration: underline;
 }
 
 .welcome-message {
