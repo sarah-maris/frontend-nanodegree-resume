@@ -125,9 +125,9 @@ var education = {
 bio.display = function() {
 	// Name and role to header
 	var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
-	$('#header').prepend(formattedRole);
+	$('header').prepend(formattedRole);
 	var formattedName = HTMLheaderName.replace('%data%', bio.name);
-	$('#header').prepend(formattedName);
+	$('header').prepend(formattedName);
 
 	//Contact info for header
 	var formattedMobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
@@ -143,18 +143,18 @@ bio.display = function() {
 
 	// Bio Picture
 	var formatteedBioPic = HTMLbioPic.replace('%data%', bio.bioPic);
-	$('#header').append(formatteedBioPic);
+	$('header').append(formatteedBioPic);
 	var formattedBioPicX = HTMLbioPicX.replace('%data1%', bio.bioPic);
 	// 2x Picture
 	formattedBioPicX = formattedBioPicX.replace('%data2%', bio.bioPic2X);
 	$(formattedBioPicX).insertBefore('.biopic');
 	// Welcome message header
 	var formattedWelcomeMsg = HTMLwelcomeMsg.replace('%data%', bio.welcomeMsg);
-	$('#header').append(formattedWelcomeMsg);
+	$('header').append(formattedWelcomeMsg);
 
 	//Skills
 	if ( bio.skills.length > 0 ) {
-		$('#header').append(HTMLskillsStart);
+		$('header').append(HTMLskillsStart);
 		var formattedSkill;
 		for (var skill in bio.skills) {
 			formattedSkill = HTMLskills.replace('%data%', bio.skills[skill]);
@@ -233,7 +233,7 @@ projects.display = function(){
 		};
 		
 		//Project URL
-		$('.title:last').attr('href', projects.projects[project].url);
+		$('.link-text:last').attr('href', projects.projects[project].url);
 	}
 
 }
@@ -258,7 +258,7 @@ education.displaySchools = function(){
 		$('.education-entry:last').append(formattedMajor);
 		
 		//School URL
-		$('.title:last').attr('href',education.schools[school].url);
+		$('.link-text:last').attr('href',education.schools[school].url);
 	}
 }
 
@@ -285,7 +285,7 @@ education.displayOnline = function(){
 		$('a:last').attr('href',education.onlineCourses[course].url);
 		
 		//School URL
-		$('.title:last').attr('href',education.onlineCourses[course].schoolurl);
+		$('.link-text:last').attr('href',education.onlineCourses[course].schoolurl);
 	}
 }
 
@@ -333,3 +333,4 @@ $('#main').append(internationalizeButton);
 
 // TODO:  add lightbox to projects: http://lokeshdhakar.com/projects/lightbox2/ 
 // TODO: optimize images
+// TODO: add live links to contacts
