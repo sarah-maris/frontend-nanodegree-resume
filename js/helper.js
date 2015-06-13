@@ -30,8 +30,8 @@ var HTMLskillsStart = '<h3 id="skillsH3">Skills at a Glance:</h3><ul id="skills"
 var HTMLskills = '<li class="flex-item"><span class="white-text">%data%</span></li>';
 
 var HTMLworkStart = '<div class="work-entry"></div>';
-var HTMLworkEmployer = '<a class="title" href="#">%data%';
-var HTMLworkTitle = ' - %data%</a>';
+var HTMLworkEmployer = '<div class="title" href="#">%data%'; // change "a" to "div" since it doesn't go anywhere
+var HTMLworkTitle = ' - %data%</div>';
 var HTMLworkDates = '<div class="date-text">%data%</div>';
 var HTMLworkLocation = '<div class="location-text">%data%</div>';
 var HTMLworkDescription = '<p><br>%data%</p>';

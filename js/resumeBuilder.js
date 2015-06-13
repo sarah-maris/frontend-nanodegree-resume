@@ -26,7 +26,7 @@ var work = {
 			"title" : "Web Developer/Small Business Consultant",
 			"location" : "Fair Haven, NJ",
 			"dates" : "2009 - present",
-			"description" : "Assist small business owners and non-profit organizations with website development, online marketing and computer training"
+			"description" : "Assist small business owners and non-profit organizations with website development, online marketing and computer training",
 		},
 		{
 			"employer" : "The Quaker Oats Company",
@@ -68,19 +68,22 @@ var projects =  {
 			"title" : "Cozmeena Enlightened Living",
 			"dates" : "2013 - present",
 			"description" : "Developed website and on-line store for the Cozmeena lifestyle brand using WordPress CMS. Project involved creating several custom post types, major re-tooling of the site theme and integration of Woocommerce",
-			"images" : [ "images/cozmeena/cozmeena-screenshot.png", "images/cozmeena/cozmeena-hand.jpg", "images/cozmeena/cozmeena-group.jpg", "images/cozmeena/pocket-hearts.jpg" ]
+			"images" : [ "images/cozmeena/cozmeena-screenshot.png", "images/cozmeena/cozmeena-hand.jpg", "images/cozmeena/cozmeena-group.jpg", "images/cozmeena/pocket-hearts.jpg" ],
+			"url" : "http://cozmeena.com/"
 		},
 		{
 			"title" : "Cups and Cakes Bakery",
 			"dates" : "2014 - 2015",
 			"description" : "Redesigned website using WordPress CMS.  Reformatted pages, added images, redesigned menu and added social media links",
-			"images" : [ "images/cups/cups-screenshot.jpg", "images/cups/juices.jpg", "images/cups/fruit-tart.jpg", "images/cups/blueberry-scones.jpg", "images/cups/birthday.png",   "images/cups/sweet-potato-bread.jpg"]
+			"images" : [ "images/cups/cups-screenshot.jpg", "images/cups/juices.jpg", "images/cups/fruit-tart.jpg", "images/cups/blueberry-scones.jpg", "images/cups/birthday.png",   "images/cups/sweet-potato-bread.jpg"],
+			"url" : "http://cupsandcakesrumson.com/"
 		},
 		{
 			"title" : "HMF Express",
 			"dates" : "2014 - present",
 			"description" : "Designed new website using WordPres CMS to highlight product customization, product quality and shipping speed.  Incorporated company's quirky personality and commitment to customer service in design",
-			"images" : [ "images/hmf/hmf-screenshot.png", "images/hmf/wood-dale.jpg", "images/hmf/welding-table.jpg", "images/hmf/people.jpg", "images/hmf/hinge-welder.jpg"]
+			"images" : [ "images/hmf/hmf-screenshot.png", "images/hmf/wood-dale.jpg", "images/hmf/welding-table.jpg", "images/hmf/people.jpg", "images/hmf/hinge-welder.jpg"],
+			"url" : "http://wp.hmfexpress.s463.sureserver.com/"
 		}
 	]
 };
@@ -110,7 +113,8 @@ var education = {
 			"title" : "Front End Web Development Nanodegree",
 			"school" : "Udacity",
 			"dates" : "May 2015 - present",
-			"url" : "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001"
+			"url" : "http://www.udacity.com/course/front-end-web-developer-nanodegree--nd001",
+			"schoolurl" : "http://www.udacity.com"
 		}
 	]
 };
@@ -221,7 +225,10 @@ projects.display = function(){
 				var formattedImage = HTMLprojectImage.replace('%data%', projects.projects[project].images[image]);
 				$('.project-entry:last').append(formattedImage);
 			}
-		}
+		};
+		
+		//Project URL
+		$('.title:last').attr('href', projects.projects[project].url);
 	}
 
 }
@@ -232,18 +239,21 @@ education.displaySchools = function(){
 		//Start school section
 		$('#education').append(HTMLschoolStart);
 
-		//Add name and degree
+		//Name and degree
 		var formattedName = HTMLschoolName.replace('%data%', education.schools[school].name);
 		var formattedDegree = HTMLschoolDegree.replace('%data%', education.schools[school].degree);
 		$('.education-entry:last').append(formattedName + formattedDegree);
 
-		//Add dates, location and major
+		//Dates, location and major
 		var formattedDates = HTMLschoolDates.replace('%data%', education.schools[school].dates);
 		$('.education-entry:last').append(formattedDates);
 		var formattedLocation = HTMLschoolLocation.replace('%data%', education.schools[school].location);
 		$('.education-entry:last').append(formattedLocation);
 		var formattedMajor = HTMLschoolMajor.replace('%data%', education.schools[school].majors);
 		$('.education-entry:last').append(formattedMajor);
+		
+		//School URL
+		$('.title:last').attr('href',education.schools[school].url);
 	}
 }
 
@@ -257,16 +267,20 @@ education.displayOnline = function(){
 		//Start online course section
 		$('#education').append(HTMLschoolStart);
 
-		//Add name and degree
+		//Name and degree
 		var formattedTitle = HTMLonlineTitle.replace('%data%', education.onlineCourses[course].title);
 		var formattedSchool = HTMLonlineSchool.replace('%data%', education.onlineCourses[course].school);
 		$('.education-entry:last').append(formattedTitle + formattedSchool);
 
-		//Add dates, location and major
+		//Dates and URL
 		var formattedDates = HTMLonlineDates.replace('%data%', education.onlineCourses[course].dates);
 		$('.education-entry:last').append(formattedDates);
 		var formattedLocation = HTMLonlineURL.replace('%data%', education.onlineCourses[course].url);
 		$('.education-entry:last').append(formattedLocation);
+		$('a:last').attr('href',education.onlineCourses[course].url);
+		
+		//School URL
+		$('.title:last').attr('href',education.onlineCourses[course].schoolurl);
 	}
 }
 
@@ -312,5 +326,5 @@ $('#mapDiv').append(googleMap);
 // Add button to internationalize name
 $('#main').append(internationalizeButton);
 
-// TO DO 
-/* add lightbox to projects: http://lokeshdhakar.com/projects/lightbox2/ */
+// TODO:  add lightbox to projects: http://lokeshdhakar.com/projects/lightbox2/ 
+// TODO: optimize images
