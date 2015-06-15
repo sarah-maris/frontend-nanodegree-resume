@@ -6,7 +6,10 @@ module.exports = function(grunt) {
         options: {
           engine: 'im',
           sizes: [{            
-            width: 400,
+            width: 600,
+            quality: 30       
+          }, {
+		  width: 400,
             suffix: '_2x',
             quality: 30       
           }, {            
@@ -19,9 +22,9 @@ module.exports = function(grunt) {
 
         files: [{
           expand: true,
-          src: ['*.{gif,jpg,png}'],
-          cwd: 'images_src/bio/',
-          dest: 'images/bio'
+          src: ['**.{gif,jpg,png}'],
+          cwd: 'images_src',
+          dest: 'images'
         }]
       }
     },
@@ -46,9 +49,10 @@ module.exports = function(grunt) {
     copy: {
       dev: {
         files: [{
-          expand: true,
-          src: 'images_src/logo/*.{gif,jpg,png,.svg}',
-          dest: 'images/'
+          expand: true,    expand: true,
+          cwd: 'images_src/map-icon/',
+          src: '*.{gif,jpg,png,.svg}',
+          dest: 'images/map-icon'
         }]
       },
     },
