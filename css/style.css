@@ -67,6 +67,12 @@ header {
 .link-text {
   font-weight: bold;
   color: #d6e7c9;
+  text-decoration: none;
+}
+
+.link-text:hover {
+  color: #89a38d;
+  text-decoration: underline;
 }
 
 .biopic {
@@ -99,7 +105,7 @@ header {
 .connect {
   background-color: #89a38d;
   color:  #d6e7c9;
-  font: bold 36px/40px 'PT sans', serif;
+  font: bold 24px/36px 'PT sans', serif;
   padding: 20px 0;
   text-align: center;
 }

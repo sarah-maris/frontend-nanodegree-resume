@@ -4,12 +4,12 @@ var HTMLheaderName = '<h1 id="name">%data%</h1>';
 var HTMLheaderRole = '<span id="role">%data%</span><hr/>';
 
 var HTMLcontactGeneric = '<li class="flex-item"><span class="connect-text">%contact%</span><span class="link-text">%data%</span></li>';
-var HTMLmobile = '<li class="flex-item"><span class="connect-text">mobile</span><span class="link-text">%data%</span></li>';
-var HTMLemail = '<li class="flex-item"><span class="connect-text">email</span><span class="link-text">%data%</span></li>';
-var HTMLtwitter = '<li class="flex-item"><span class="connect-text">twitter</span><span class="link-text">%data%</span></li>';
-var HTMLgithub = '<li class="flex-item"><span class="connect-text">github</span><span class="link-text">%data%</span></li>';
-var HTMLblog = '<li class="flex-item"><span class="connect-text">blog</span><span class="link-text">%data%</span></li>';
-var HTMLlocation = '<li class="flex-item"><span class="connect-text">location</span><span class="link-text">%data%</span></li>';
+var HTMLmobile = '<li class="flex-item"><span class="connect-text">mobile</span><a href="tel:1-%data1%" class="link-text">%data2%</span></li>'; // add click to call
+var HTMLemail = '<li class="flex-item"><span class="connect-text">email</span><a href="mailto:%data1%?subject=online resume" class="link-text">%data2%</a></li>'; // add live link to email
+var HTMLtwitter = '<li class="flex-item"><span class="connect-text">twitter</span><a href="https://twitter.com/%data1%" target="_blank" class="link-text">%data2%</a></li>';//add live link to twitter 
+var HTMLgithub = '<li class="flex-item"><span class="connect-text">github</span><a href="https://github.com/%data1%" target="_blank" class="link-text">%data2%</a></li>'; // add live link to github
+var HTMLblog = '<li class="flex-item"><span class="connect-text">blog</span><span class="link-text">%data%</span></li>'; // ignore -- don't have blog
+var HTMLlocation = '<li class="flex-item"><span class="connect-text">location</span><a href="#mapDiv" class="link-text">%data%</a></li>';//link to map below
 
 var HTMLbioPic = '<picture><img src="%data%" class="biopic"></picture>';//add "picture" tag
 var HTMLbioPicX = '<source media="(min-width: 750px)" srcset="%data2% 2x, %data1% 1x">'; //add HTML string for 1X and 2X pictures
@@ -78,7 +78,7 @@ $(document).click(function(loc) {
 
 
 // Google Map
-var map;    // declares a global map variable
+var map;    
 
 function initializeMap() {
 
@@ -142,15 +142,18 @@ function initializeMap() {
     var lon = placeData.geometry.location.lng();  // longitude
     var name = placeData.formatted_address;   // name 
     var bounds = window.mapBounds;            // current boundaries of the map window
-
-    // marker is an object with additional data about the pin for a single location
+	
+    // Marker 
+	var star = 'images/map-icon/star.png';
+	
     var marker = new google.maps.Marker({
       map: map,
       position: placeData.geometry.location,
-      title: name
+      title: name,
+	  icon: star
     });
 
-	//content for info window
+	//Info window
 	var contentString = '<div id="content">'+ name + '<p> Latitude: ' + lat + '<br>' + 'Longitude:  ' + lon + '</div>';	
 	
     var infoWindow = new google.maps.InfoWindow({

@@ -1,4 +1,4 @@
-/* INPUT DATA */
+/* DATA */
 
 // Bio and contact information
 var bio = {
@@ -130,23 +130,21 @@ bio.display = function() {
 	$('header').prepend(formattedName);
 
 	//Contact info for header
-	var formattedMobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
+	var formattedMobile = HTMLmobile.replace('%data1%', bio.contacts.mobile).replace('%data2%', bio.contacts.mobile);
 	$('#topContacts').prepend(formattedMobile);
-	var formattedEmail = HTMLemail.replace('%data%', bio.contacts.email);
+	var formattedEmail = HTMLemail.replace('%data1%', bio.contacts.email).replace('%data2%', bio.contacts.email);
 	$('#topContacts').prepend(formattedEmail);
-	var formattedTwitter = HTMLtwitter.replace('%data%', bio.contacts.twitter);
+	var formattedTwitter = HTMLtwitter.replace('%data1%', bio.contacts.twitter).replace('%data2%', bio.contacts.twitter);
 	$('#topContacts').prepend(formattedTwitter);
-	var formattedGithub = HTMLgithub.replace('%data%', bio.contacts.github);
+	var formattedGithub = HTMLgithub.replace('%data1%', bio.contacts.github).replace('%data2%', bio.contacts.github);
 	$('#topContacts').prepend(formattedGithub);
 	var formattedLocation = HTMLlocation.replace('%data%', bio.contacts.location);
 	$('#topContacts').prepend(formattedLocation);
 
-	// Bio Picture
+	//Bio Picture
 	var formatteedBioPic = HTMLbioPic.replace('%data%', bio.bioPic);
 	$('header').append(formatteedBioPic);
-	var formattedBioPicX = HTMLbioPicX.replace('%data1%', bio.bioPic);
-	// 2x Picture
-	formattedBioPicX = formattedBioPicX.replace('%data2%', bio.bioPic2X);
+	var formattedBioPicX = HTMLbioPicX.replace('%data1%', bio.bioPic).replace('%data2%', bio.bioPic2X); // add  2x Picture
 	$(formattedBioPicX).insertBefore('.biopic');
 	// Welcome message header
 	var formattedWelcomeMsg = HTMLwelcomeMsg.replace('%data%', bio.welcomeMsg);
@@ -163,16 +161,11 @@ bio.display = function() {
 	}
 
 	//Contact info for footer
-	HTMLmobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
-	$('#footerContacts').prepend(HTMLmobile);
-	HTMLemail = HTMLemail.replace('%data%', bio.contacts.email);
-	$('#footerContacts').prepend(HTMLemail);
-	HTMLtwitter = HTMLtwitter.replace('%data%', bio.contacts.twitter);
-	$('#footerContacts').prepend(HTMLtwitter);
-	HTMLgithub = HTMLgithub.replace('%data%', bio.contacts.github);
-	$('#footerContacts').prepend(HTMLgithub);
-	HTMLlocation = HTMLlocation.replace('%data%', bio.contacts.location);
-	$('#footerContacts').prepend(HTMLlocation);
+	$('#footerContacts').prepend(formattedMobile);
+	$('#footerContacts').prepend(formattedEmail);
+	$('#footerContacts').prepend(formattedTwitter);
+	$('#footerContacts').prepend(formattedGithub);
+	$('#footerContacts').prepend(formattedLocation);
 }
 
 // Function to display work experience (adapted to show both paid and volunteer jobs)
@@ -333,4 +326,3 @@ $('#main').append(internationalizeButton);
 
 // TODO:  add lightbox to projects: http://lokeshdhakar.com/projects/lightbox2/ 
 // TODO: optimize images
-// TODO: add live links to contacts
