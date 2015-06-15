@@ -26,20 +26,20 @@ var HTMLworkLocation = '<div class="location-text">%data%</div>';
 var HTMLworkDescription = '<p><br>%data%</p>';
 
 var HTMLprojectStart = '<article class="project-entry"></article>';// change 'div' to 'article'
-var HTMLprojectTitle = '<a class="title-link" href="#">%data%</a>';
+var HTMLprojectTitle = '<a class="title-link" href="#" target="_blank">%data%</a>'; // open link in new tab
 var HTMLprojectDates = '<div class="date-text">%data%</div>';
 var HTMLprojectDescription = '<p><br>%data%</p>';
 var HTMLprojectImage = '<a href="%data1%" data-lightbox="%data2%"><img class="project-image" src="%data3%"></a>'; // add lightbox to images
 
 var HTMLschoolStart = '<article class="education-entry"></article>';// change 'div' to 'article'
-var HTMLschoolName = '<a class="title-link" href="#">%data%';
+var HTMLschoolName = '<a class="title-link" href="#" target="_blank">%data%'; // open link in new tab
 var HTMLschoolDegree = ' -- %data%</a>';
 var HTMLschoolDates = '<div class="date-text">%data%</div>';
 var HTMLschoolLocation = '<div class="location-text">%data%</div>';
 var HTMLschoolMajor = '<em><br>Major: %data%</em>';
 
 var HTMLonlineClasses = '<h3 id="online-courses">Online Classes</h3>';
-var HTMLonlineTitle = '<a class="title-link" href="#">%data%';
+var HTMLonlineTitle = '<a class="title-link" href="#" target="_blank">%data%'; // open link in new tab
 var HTMLonlineSchool = ' - %data%</a>';
 var HTMLonlineDates = '<div class="date-text">%data%</div>';
 var HTMLonlineURL = '<br><a class="course-link" href="#">%data%</a>';

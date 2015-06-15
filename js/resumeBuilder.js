@@ -226,7 +226,7 @@ projects.display = function(){
 		};
 		
 		//Project URL
-		$('.link-text:last').attr('href', projects.projects[project].url);
+		$('.title-link:last').attr('href', projects.projects[project].url);
 	}
 
 }
@@ -251,7 +251,7 @@ education.displaySchools = function(){
 		$('.education-entry:last').append(formattedMajor);
 		
 		//School URL
-		$('.link-text:last').attr('href',education.schools[school].url);
+		$('.title-link:last').attr('href',education.schools[school].url);
 	}
 }
 
@@ -278,7 +278,7 @@ education.displayOnline = function(){
 		$('a:last').attr('href',education.onlineCourses[course].url);
 		
 		//School URL
-		$('.link-text:last').attr('href',education.onlineCourses[course].schoolurl);
+		$('.title-link:last').attr('href',education.onlineCourses[course].schoolurl);
 	}
 }
 
@@ -324,5 +324,4 @@ $('#mapDiv').append(googleMap);
 // Add button to internationalize name
 $('#main').append(internationalizeButton);
 
-// TODO:  fix url links
 // TODO: optimize images
