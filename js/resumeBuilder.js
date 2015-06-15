@@ -12,8 +12,8 @@ var bio = {
 			"github" : "sarah-maris",
 			"location" : "Fair Haven, NJ"
 		},
-		"bioPic" : "images/bio/sarah-maris-200_1x.jpg",
-		"bioPic2X": "images/bio/sarah-maris-400_2x.jpg",
+		"bioPic" : "images/sarah-maris-200_1x.jpg",
+		"bioPic2X": "images/sarah-maris-400_2x.jpg",
 		"skills" : ["HTML/CSS", "WordPress", "Javascript", "MailChimp", "Facebook", "Twitter", "Small Business Marketing", "Non-profit Communications", "Microsoft Office", "Google Apps for Education"]
     };
 
@@ -68,21 +68,21 @@ var projects =  {
 			"title" : "Cozmeena Enlightened Living",
 			"dates" : "2013 - present",
 			"description" : "Developed website and on-line store for the Cozmeena lifestyle brand using WordPress CMS. Project involved creating several custom post types, major re-tooling of the site theme and integration of Woocommerce",
-			"images" : [ "images/cozmeena/cozmeena-screen-shot.jpg", "images/cozmeena/cozmeena-hand.jpg", "images/cozmeena/cozmeena-group.jpg", "images/cozmeena/pocket-hearts.jpg" ],
+			"images" : [ "images/cozmeena-screen-shot-600.jpg", "images/cozmeena-hand-600.jpg", "images/cozmeena-group-600.jpg", "images/pocket-hearts-600.jpg" ],
 			"url" : "http://cozmeena.com/"
 		},
 		{
 			"title" : "Cups and Cakes Bakery",
 			"dates" : "2014 - 2015",
 			"description" : "Redesigned website using WordPress CMS.  Reformatted pages, added images, redesigned menu and added social media links",
-			"images" : [ "images/cups/cups-screenshot.jpg", "images/cups/fruit-tart.jpg", "images/cups/blueberry-scones.jpg", "images/cups/birthday.jpg"],
+			"images" : [ "images/cups-screenshot-600.jpg", "images/fruit-tart-600.jpg", "images/blueberry-scones-600.jpg", "images/birthday-600.jpg"],
 			"url" : "http://cupsandcakesrumson.com/"
 		},
 		{
 			"title" : "HMF Express",
 			"dates" : "2014 - present",
 			"description" : "Designed new website using WordPres CMS to highlight product customization, product quality and shipping speed.  Incorporated company's quirky personality and commitment to customer service in design",
-			"images" : [ "images/hmf/hmf-screenshot.jpg", "images/hmf/wood-dale.jpg", "images/hmf/people.jpg", "images/hmf/hinge-welder.jpg"],
+			"images" : [ "images/hmf-screenshot-600.jpg", "images/wood-dale-600.jpg", "images/people-600.jpg", "images/hinge-welder-600.jpg"],
 			"url" : "http://wp.hmfexpress.s463.sureserver.com/"
 		}
 	]
