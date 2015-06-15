@@ -5,19 +5,18 @@ module.exports = function(grunt) {
       dev: {
         options: {
           engine: 'im',
-          sizes: [{            
+          sizes: [{
             width: 600,
-            quality: 30       
+            quality: 30
           }, {
 		  width: 400,
             suffix: '_2x',
-            quality: 30       
-          }, {            
+            quality: 30
+          }, {
             width: 200,
             suffix: '_1x',
-            quality: 30       
-          } 
-		  ]
+            quality: 30
+          }]
         },
 
         files: [{
@@ -32,8 +31,8 @@ module.exports = function(grunt) {
     /* Clear out the images directory if it exists */
     clean: {
       dev: {
-        src: ['images'],
-      },
+        src: ['images']
+      }
     },
 
     /* Generate the images directory if it is missing */
@@ -41,8 +40,8 @@ module.exports = function(grunt) {
       dev: {
         options: {
           create: ['images']
-        },
-      },
+        }
+      }
     },
 
     /* Copy the "fixed" images that don't go through processing into the images/directory */
@@ -54,10 +53,10 @@ module.exports = function(grunt) {
           src: '*.{gif,jpg,png,.svg}',
           dest: 'images/map-icon'
         }]
-      },
-    },
+      }
+    }
   });
-  
+
   grunt.loadNpmTasks('grunt-responsive-images');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');

@@ -6,7 +6,7 @@ var HTMLheaderRole = '<span id="role">%data%</span><hr/>';
 var HTMLcontactGeneric = '<li class="flex-item"><span class="connect-text">%contact%</span><span class="link-text">%data%</span></li>';
 var HTMLmobile = '<li class="flex-item"><span class="connect-text">mobile</span><a href="tel:1-%data1%" class="link-text">%data2%</span></li>'; // add click to call
 var HTMLemail = '<li class="flex-item"><span class="connect-text">email</span><a href="mailto:%data1%?subject=online resume" class="link-text">%data2%</a></li>'; // add live link to email
-var HTMLtwitter = '<li class="flex-item"><span class="connect-text">twitter</span><a href="https://twitter.com/%data1%" target="_blank" class="link-text">%data2%</a></li>';//add live link to twitter 
+var HTMLtwitter = '<li class="flex-item"><span class="connect-text">twitter</span><a href="https://twitter.com/%data1%" target="_blank" class="link-text">%data2%</a></li>';//add live link to twitter
 var HTMLgithub = '<li class="flex-item"><span class="connect-text">github</span><a href="https://github.com/%data1%" target="_blank" class="link-text">%data2%</a></li>'; // add live link to github
 var HTMLblog = '<li class="flex-item"><span class="connect-text">blog</span><span class="link-text">%data%</span></li>'; // ignore -- don't have blog
 var HTMLlocation = '<li class="flex-item"><span class="connect-text">location</span><a href="#mapDiv" class="link-text">%data%</a></li>';//link to map below
@@ -52,7 +52,7 @@ var googleMap = '<article id="map"></article>';
 $(document).ready(function() {
   $('button').click(function() {
     var iName = inName(bio.name) || function(){};
-    $('#name').html(iName);  
+    $('#name').html(iName);
   });
 });
 
@@ -78,7 +78,7 @@ $(document).click(function(loc) {
 
 
 // Google Map
-var map;    
+var map;
 
 function initializeMap() {
 
@@ -88,7 +88,7 @@ function initializeMap() {
     disableDefaultUI: true,
 
 	// Show Terrain as default view and give options for Satellite and Hybrid maps
-	mapTypeId: google.maps.MapTypeId.TERRAIN, 
+	mapTypeId: google.maps.MapTypeId.TERRAIN,
 	mapTypeControl: true,
 	mapTypeControlOptions: {
       style: google.maps.MapTypeControlStyle.DEFAULT,
@@ -96,7 +96,7 @@ function initializeMap() {
         google.maps.MapTypeId.HYBRID,
         google.maps.MapTypeId.SATELLITE,
 		google.maps.MapTypeId.ROADMAP,
-		google.maps.MapTypeId.TERRAIN,
+		google.maps.MapTypeId.TERRAIN
 	] },
 	// Add zoom control
 	zoomControl: true,
@@ -122,11 +122,11 @@ function initializeMap() {
       locations.push(education.schools[school].location);
     }
 
-    // iterates through work locations and appends each location 
+    // iterates through work locations and appends each location
     for (var job in work.jobs) {
       locations.push(work.jobs[job].location);
     }
-	// iterates through volunteer position locations and appends each location 
+	// iterates through volunteer position locations and appends each location
 	for (var position in work.volunteerPositions) {
       locations.push(work.volunteerPositions[position].location);
     }
@@ -138,14 +138,14 @@ function initializeMap() {
   function createMapMarker(placeData) {
 
     // save location data from the search result object to local variables
-    var lat = placeData.geometry.location.lat();  // latitude 
+    var lat = placeData.geometry.location.lat();  // latitude
     var lon = placeData.geometry.location.lng();  // longitude
-    var name = placeData.formatted_address;   // name 
+    var name = placeData.formatted_address;   // name
     var bounds = window.mapBounds;            // current boundaries of the map window
-	
-    // Marker 
+
+    // Marker
 	var star = 'images/map-icon/star.png';
-	
+
     var marker = new google.maps.Marker({
       map: map,
       position: placeData.geometry.location,
@@ -154,15 +154,15 @@ function initializeMap() {
     });
 
 	//Info window
-	var contentString = '<div id="content">'+ name + '<p> Latitude: ' + lat + '<br>' + 'Longitude:  ' + lon + '</div>';	
-	
+	var contentString = '<div id="content">'+ name + '<p> Latitude: ' + lat + '<br>' + 'Longitude:  ' + lon + '</div>';
+
     var infoWindow = new google.maps.InfoWindow({
       content: contentString
     });
-    
+
 	//add info window
     google.maps.event.addListener(marker, 'click', function() {
-	  infoWindow.open(map,marker);	  
+	  infoWindow.open(map,marker);
     });
 
     // add pin to the map.
@@ -173,7 +173,7 @@ function initializeMap() {
     map.setCenter(bounds.getCenter());
   }
 
-  //create map marker 
+  //create map marker
   function callback(results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
       createMapMarker(results[0]);
@@ -193,7 +193,7 @@ function initializeMap() {
       var request = {
         query: locations[place]
       };
-	  
+
       service.textSearch(request, callback);
     }
   }

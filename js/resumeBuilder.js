@@ -26,7 +26,7 @@ var work = {
 			"title" : "Web Developer/Small Business Consultant",
 			"location" : "Fair Haven, NJ",
 			"dates" : "2009 - present",
-			"description" : "Assist small business owners and non-profit organizations with website development, online marketing and computer training",
+			"description" : "Assist small business owners and non-profit organizations with website development, online marketing and computer training"
 		},
 		{
 			"employer" : "The Quaker Oats Company",
@@ -122,7 +122,7 @@ var education = {
 /* FUNCTIONS */
 
 // Function to display bio information in header and footer
-bio.display = function() {
+bio.display = function(){
 	// Name and role to header
 	var formattedRole = HTMLheaderRole.replace('%data%', bio.role);
 	$('header').prepend(formattedRole);
@@ -151,7 +151,7 @@ bio.display = function() {
 	$('header').append(formattedWelcomeMsg);
 
 	//Skills
-	if ( bio.skills.length > 0 ) {
+	if (bio.skills.length > 0 ) {
 		$('header').append(HTMLskillsStart);
 		var formattedSkill;
 		for (var skill in bio.skills) {
@@ -166,7 +166,7 @@ bio.display = function() {
 	$('#footerContacts').prepend(formattedTwitter);
 	$('#footerContacts').prepend(formattedGithub);
 	$('#footerContacts').prepend(formattedLocation);
-}
+};
 
 // Function to display work experience (adapted to show both paid and volunteer jobs)
 work.display = function(jobType) {
@@ -198,7 +198,7 @@ work.display = function(jobType) {
 		var formattedDescription = HTMLworkDescription.replace('%data%', work[jobType][job].description);
 		$('.work-entry:last').append(formattedDescription);
 	}
-}
+};
 
 // Function to display projects
 projects.display = function(){
@@ -223,13 +223,12 @@ projects.display = function(){
 				var formattedImage = HTMLprojectImage.replace('%data1%', projects.projects[project].images[image]).replace('%data2%', projects.projects[project].title).replace('%data3%', projects.projects[project].images[image]);
 				$('.project-entry:last').append(formattedImage);
 			}
-		};
-		
+		}
+
 		//Project URL
 		$('.title-link:last').attr('href', projects.projects[project].url);
 	}
-
-}
+};
 
 // Function to display formal education
 education.displaySchools = function(){
@@ -249,11 +248,11 @@ education.displaySchools = function(){
 		$('.education-entry:last').append(formattedLocation);
 		var formattedMajor = HTMLschoolMajor.replace('%data%', education.schools[school].majors);
 		$('.education-entry:last').append(formattedMajor);
-		
+
 		//School URL
 		$('.title-link:last').attr('href',education.schools[school].url);
 	}
-}
+};
 
 // Function to display online coursework
 education.displayOnline = function(){
@@ -276,11 +275,11 @@ education.displayOnline = function(){
 		var formattedLocation = HTMLonlineURL.replace('%data%', education.onlineCourses[course].url);
 		$('.education-entry:last').append(formattedLocation);
 		$('a:last').attr('href',education.onlineCourses[course].url);
-		
+
 		//School URL
 		$('.title-link:last').attr('href',education.onlineCourses[course].schoolurl);
 	}
-}
+};
 
 // Function to pull locations from work and education data
 function locationizer(work_obj) {
@@ -323,5 +322,3 @@ $('#mapDiv').append(googleMap);
 
 // Add button to internationalize name
 $('#main').append(internationalizeButton);
-
-// TODO: optimize images
