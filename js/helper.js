@@ -29,7 +29,7 @@ var HTMLprojectStart = '<article class="project-entry"></article>';// change 'di
 var HTMLprojectTitle = '<a class="title-link" href="#">%data%</a>';
 var HTMLprojectDates = '<div class="date-text">%data%</div>';
 var HTMLprojectDescription = '<p><br>%data%</p>';
-var HTMLprojectImage = '<img class="project-image" src="%data%">';
+var HTMLprojectImage = '<a href="%data1%" data-lightbox="%data2%"><img class="project-image" src="%data3%"></a>'; // add lightbox to images
 
 var HTMLschoolStart = '<article class="education-entry"></article>';// change 'div' to 'article'
 var HTMLschoolName = '<a class="title-link" href="#">%data%';

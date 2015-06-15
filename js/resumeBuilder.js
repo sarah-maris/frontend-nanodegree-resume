@@ -220,7 +220,7 @@ projects.display = function(){
 		//Project images
 		if ( projects.projects[project].images.length > 0 ) {
 			for (var image in projects.projects[project].images) {
-				var formattedImage = HTMLprojectImage.replace('%data%', projects.projects[project].images[image]);
+				var formattedImage = HTMLprojectImage.replace('%data1%', projects.projects[project].images[image]).replace('%data2%', projects.projects[project].title).replace('%data3%', projects.projects[project].images[image]);
 				$('.project-entry:last').append(formattedImage);
 			}
 		};
