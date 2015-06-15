@@ -68,21 +68,21 @@ var projects =  {
 			"title" : "Cozmeena Enlightened Living",
 			"dates" : "2013 - present",
 			"description" : "Developed website and on-line store for the Cozmeena lifestyle brand using WordPress CMS. Project involved creating several custom post types, major re-tooling of the site theme and integration of Woocommerce",
-			"images" : [ "images/cozmeena/cozmeena-screenshot.png", "images/cozmeena/cozmeena-hand.jpg", "images/cozmeena/cozmeena-group.jpg", "images/cozmeena/pocket-hearts.jpg" ],
+			"images" : [ "images/cozmeena/cozmeena-screen-shot.jpg", "images/cozmeena/cozmeena-hand.jpg", "images/cozmeena/cozmeena-group.jpg", "images/cozmeena/pocket-hearts.jpg" ],
 			"url" : "http://cozmeena.com/"
 		},
 		{
 			"title" : "Cups and Cakes Bakery",
 			"dates" : "2014 - 2015",
 			"description" : "Redesigned website using WordPress CMS.  Reformatted pages, added images, redesigned menu and added social media links",
-			"images" : [ "images/cups/cups-screenshot.jpg", "images/cups/juices.jpg", "images/cups/fruit-tart.jpg", "images/cups/blueberry-scones.jpg", "images/cups/birthday.png",   "images/cups/sweet-potato-bread.jpg"],
+			"images" : [ "images/cups/cups-screenshot.jpg", "images/cups/fruit-tart.jpg", "images/cups/blueberry-scones.jpg", "images/cups/birthday.jpg"],
 			"url" : "http://cupsandcakesrumson.com/"
 		},
 		{
 			"title" : "HMF Express",
 			"dates" : "2014 - present",
 			"description" : "Designed new website using WordPres CMS to highlight product customization, product quality and shipping speed.  Incorporated company's quirky personality and commitment to customer service in design",
-			"images" : [ "images/hmf/hmf-screenshot.png", "images/hmf/wood-dale.jpg", "images/hmf/welding-table.jpg", "images/hmf/people.jpg", "images/hmf/hinge-welder.jpg"],
+			"images" : [ "images/hmf/hmf-screenshot.jpg", "images/hmf/wood-dale.jpg", "images/hmf/people.jpg", "images/hmf/hinge-welder.jpg"],
 			"url" : "http://wp.hmfexpress.s463.sureserver.com/"
 		}
 	]
@@ -324,5 +324,5 @@ $('#mapDiv').append(googleMap);
 // Add button to internationalize name
 $('#main').append(internationalizeButton);
 
-// TODO:  add lightbox to projects: http://lokeshdhakar.com/projects/lightbox2/ 
+// TODO:  fix url links
 // TODO: optimize images
