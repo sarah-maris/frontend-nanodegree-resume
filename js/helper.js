@@ -115,20 +115,20 @@ function initializeMap() {
     var locations = [];
 
     // adds the single location property from bio to the locations array
-    locations.push(bio.contacts.location);
+    locations.push(model.bio.contacts.location);
 
     // iterates through school locations and appends each location
-    for (var school in education.schools) {
-      locations.push(education.schools[school].location);
+    for (var school in model.education.schools) {
+      locations.push(model.education.schools[school].location);
     }
 
     // iterates through work locations and appends each location
-    for (var job in work.jobs) {
-      locations.push(work.jobs[job].location);
+    for (var job in model.work.jobs) {
+      locations.push(model.work.jobs[job].location);
     }
 	// iterates through volunteer position locations and appends each location
-	for (var position in work.volunteerPositions) {
-      locations.push(work.volunteerPositions[position].location);
+	for (var position in model.work.volunteerPositions) {
+      locations.push(model.work.volunteerPositions[position].location);
     }
     return locations;
   }
