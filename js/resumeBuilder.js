@@ -127,6 +127,10 @@ var operations = {
 
 	init: function() {
 		view.bio();
+		for ( jobType in model.work ) {
+			view.work( jobType );
+		}
+
 
 	},
 
@@ -166,31 +170,7 @@ var operations = {
 
 
 
-// Function to display work experience (adapted to show both paid and volunteer jobs)
-workdisplay = function(jobType) {
-	for (var job in model.work[jobType] ) {
 
-		// Start job listing
-		$( operations.getExperienceType( jobType ) ).append( HTMLworkStart );
-
-		//Employer and title
-		var formattedEmployer = HTMLworkEmployer.replace('%data%', model.work[jobType][job].employer);
-		var formattedTitle = HTMLworkTitle.replace('%data%', model.work[jobType][job].title);
-		$('.work-entry:last').append(formattedEmployer + formattedTitle);
-
-		// Dates
-		var formattedDates = HTMLworkDates.replace('%data%', model.work[jobType][job].dates);
-		$('.work-entry:last').append(formattedDates);
-
-		// Location
-		var formattedLocation = HTMLworkLocation.replace('%data%', model.work[jobType][job].location);
-		$('.work-entry:last').append(formattedLocation);
-
-		//Description
-		var formattedDescription = HTMLworkDescription.replace('%data%', model.work[jobType][job].description);
-		$('.work-entry:last').append(formattedDescription);
-	}
-};
 
 // Function to display projects
 projectsdisplay = function(){
@@ -295,11 +275,6 @@ function inName(name) {
 
 /* DISPLAY INFO ON PAGE */
 
-
-// Display jobs and volunteer positions
-workdisplay("jobs");
-workdisplay("volunteerPositions");
-
 // Display projects
 projectsdisplay();
 
@@ -345,6 +320,32 @@ var view = {
 		$('#footerContacts').prepend(operations.getBioData.formattedTwitter);
 		$('#footerContacts').prepend(operations.getBioData.formattedGithub);
 		$('#footerContacts').prepend(operations.getBioData.formattedLocation);
+	},
+
+	// Function to display work experience (adapted to show both paid and volunteer jobs)
+	work: function(jobType) {
+		for (var job in model.work[jobType] ) {
+
+			// Start job listing
+			$( operations.getExperienceType( jobType ) ).append( HTMLworkStart );
+
+			//Employer and title
+			var formattedEmployer = HTMLworkEmployer.replace('%data%', operations.getJob( jobType, job ).employer);
+			var formattedTitle = HTMLworkTitle.replace('%data%', operations.getJob( jobType, job ).title);
+			$('.work-entry:last').append(formattedEmployer + formattedTitle);
+
+			// Dates
+			var formattedDates = HTMLworkDates.replace('%data%', operations.getJob( jobType, job ).dates);
+			$('.work-entry:last').append(formattedDates);
+
+			// Location
+			var formattedLocation = HTMLworkLocation.replace('%data%', operations.getJob( jobType, job ).location);
+			$('.work-entry:last').append(formattedLocation);
+
+			//Description
+			var formattedDescription = HTMLworkDescription.replace('%data%', operations.getJob( jobType, job ).description);
+			$('.work-entry:last').append(formattedDescription);
+		}
 	}
 
 }
