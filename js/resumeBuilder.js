@@ -149,17 +149,9 @@ var operations = {
 
 	getSkills: model.bio.skills,
 
-	getFormattedSkill: function( skill ){
-		return HTMLskills.replace('%data%', model.bio.skills[ skill ] );
-	},
-
 	getExperienceType: function( jobType ) {
 		if (jobType === "jobs") { return '#workExperience'; }
 		else { return '#volunteerExperience'; }
-	},
-
-	getJobs: function( jobType ) {
-		return model.work[ jobType ];
 	},
 
 	getJob: function( jobType, job ) {
