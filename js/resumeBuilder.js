@@ -20,7 +20,6 @@ var model = {
 
 	// Jobs and  volunteer work
 	work: {
-	// Add  job type to differentiate between paid and volunteer work
 		"jobs" : [
 			{
 				"employer" : "Sarah's Small Business Solutions",
@@ -63,8 +62,8 @@ var model = {
 	},
 
 	//Recent projects
-	projects: {
-		"projects": [
+	projects: [
+		
 			{
 				"title" : "Cozmeena Enlightened Living",
 				"dates" : "2013 - present",
@@ -86,8 +85,8 @@ var model = {
 				"images" : [ "images/hmf-screenshot-600.jpg", "images/wood-dale-600.jpg", "images/people-600.jpg", "images/hinge-welder-600.jpg"],
 				"url" : "http://wp.hmfexpress.s463.sureserver.com/"
 			}
-		]
-	},
+		
+	],
 
 	//Education
 	education: {
@@ -156,7 +155,9 @@ var operations = {
 
 	getJob: function( jobType, job ) {
 		return model.work[ jobType ][ job ];
-	}
+	},
+	
+	
 }
 
 
@@ -165,31 +166,31 @@ var operations = {
 
 // Function to display projects
 projectsdisplay = function(){
-	for (var project in model.projects.projects) {
+	for (var project in model.projects ) {
 		$('#projects').append(HTMLprojectStart);
 
 		// Project title
-		var formattedTitle = HTMLprojectTitle.replace('%data%', model.projects.projects[project].title);
+		var formattedTitle = HTMLprojectTitle.replace('%data%', model.projects[project].title);
 		$('.project-entry:last').append(formattedTitle);
 
 		// Project dates
-		var formattedDates = HTMLprojectDates.replace('%data%', model.projects.projects[project].dates);
+		var formattedDates = HTMLprojectDates.replace('%data%', model.projects[project].dates);
 		$('.project-entry:last').append(formattedDates);
 
 		//Project Description
-		var formattedDescription = HTMLprojectDescription.replace('%data%', model.projects.projects[project].description);
+		var formattedDescription = HTMLprojectDescription.replace('%data%', model.projects[project].description);
 		$('.project-entry:last').append(formattedDescription);
 
 		//Project images
-		if ( model.projects.projects[project].images.length > 0 ) {
-			for (var image in model.projects.projects[project].images) {
-				var formattedImage = HTMLprojectImage.replace('%data1%', model.projects.projects[project].images[image]).replace('%data2%', model.projects.projects[project].title).replace('%data3%', model.projects.projects[project].images[image]);
+		if ( model.projects[project].images.length > 0 ) {
+			for (var image in model.projects[project].images) {
+				var formattedImage = HTMLprojectImage.replace('%data1%', model.projects[project].images[image]).replace('%data2%', model.projects[project].title).replace('%data3%', model.projects[project].images[image]);
 				$('.project-entry:last').append(formattedImage);
 			}
 		}
 
 		//Project URL
-		$('.title-link:last').attr('href', model.projects.projects[project].url);
+		$('.title-link:last').attr('href', model.projects[project].url);
 	}
 };
 
@@ -316,7 +317,7 @@ var view = {
 			$('header').append(HTMLskillsStart);
 			for ( var i = 0; i < skills.length; i++ ) {
 				formattedHTMLskill = HTMLskills.replace( '%data%', skills[ i ] );
-				$('#skills').append( fromattedHTMLskill );
+				$('#skills').append( formattedHTMLskill );
 			}
 		}
 
