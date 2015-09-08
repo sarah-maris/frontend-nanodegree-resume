@@ -148,6 +148,19 @@ var operations = {
 
 	getFormattedSkill: function( skill ){
 		return HTMLskills.replace('%data%', model.bio.skills[ skill ] );
+	},
+
+	getExperienceType: function( jobType ) {
+		if (jobType === "jobs") { return '#workExperience'; }
+		else { return '#volunteerExperience'; }
+	},
+
+	getJobs: function( jobType ) {
+		return model.work[ jobType ];
+	},
+
+	getJob: function( jobType, job ) {
+		return model.work[ jobType ][ job ];
 	}
 }
 
@@ -156,15 +169,9 @@ var operations = {
 // Function to display work experience (adapted to show both paid and volunteer jobs)
 workdisplay = function(jobType) {
 	for (var job in model.work[jobType] ) {
-		// Change location of append for different job types
-		var experienceSpot;
-		if (jobType === "jobs") {
-			experienceSpot = '#workExperience';
-		} else {
-			experienceSpot = '#volunteerExperience';
-		}
+
 		// Start job listing
-		$(experienceSpot).append(HTMLworkStart);
+		$( operations.getExperienceType( jobType ) ).append( HTMLworkStart );
 
 		//Employer and title
 		var formattedEmployer = HTMLworkEmployer.replace('%data%', model.work[jobType][job].employer);
