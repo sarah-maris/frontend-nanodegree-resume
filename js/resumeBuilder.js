@@ -63,7 +63,7 @@ var model = {
 
 	//Recent projects
 	projects: [
-		
+
 			{
 				"title" : "Cozmeena Enlightened Living",
 				"dates" : "2013 - present",
@@ -85,7 +85,7 @@ var model = {
 				"images" : [ "images/hmf-screenshot-600.jpg", "images/wood-dale-600.jpg", "images/people-600.jpg", "images/hinge-welder-600.jpg"],
 				"url" : "http://wp.hmfexpress.s463.sureserver.com/"
 			}
-		
+
 	],
 
 	//Education
@@ -129,6 +129,7 @@ var operations = {
 		for ( jobType in model.work ) {
 			view.work( jobType );
 		}
+		view.projects();
 
 
 	},
@@ -156,43 +157,16 @@ var operations = {
 	getJob: function( jobType, job ) {
 		return model.work[ jobType ][ job ];
 	},
-	
-	
+
+	getProjects: model.projects,
+
 }
 
 
 
 
 
-// Function to display projects
-projectsdisplay = function(){
-	for (var project in model.projects ) {
-		$('#projects').append(HTMLprojectStart);
 
-		// Project title
-		var formattedTitle = HTMLprojectTitle.replace('%data%', model.projects[project].title);
-		$('.project-entry:last').append(formattedTitle);
-
-		// Project dates
-		var formattedDates = HTMLprojectDates.replace('%data%', model.projects[project].dates);
-		$('.project-entry:last').append(formattedDates);
-
-		//Project Description
-		var formattedDescription = HTMLprojectDescription.replace('%data%', model.projects[project].description);
-		$('.project-entry:last').append(formattedDescription);
-
-		//Project images
-		if ( model.projects[project].images.length > 0 ) {
-			for (var image in model.projects[project].images) {
-				var formattedImage = HTMLprojectImage.replace('%data1%', model.projects[project].images[image]).replace('%data2%', model.projects[project].title).replace('%data3%', model.projects[project].images[image]);
-				$('.project-entry:last').append(formattedImage);
-			}
-		}
-
-		//Project URL
-		$('.title-link:last').attr('href', model.projects[project].url);
-	}
-};
 
 // Function to display formal education
 educationdisplaySchools = function(){
@@ -266,9 +240,6 @@ function inName(name) {
 }
 
 /* DISPLAY INFO ON PAGE */
-
-// Display projects
-projectsdisplay();
 
 // Display formal education and online coursework
 educationdisplaySchools();
@@ -355,6 +326,46 @@ var view = {
 
 			//Add job description
 			$('.work-entry:last').append(formattedDescription);
+		}
+	},
+
+	// Function to display projects
+	projects: function(){
+		for (var project in operations.getProjects ) {
+			var listProject = operations.getProjects[project];
+
+			//Get data from operations
+			var formattedTitle = HTMLprojectTitle.replace('%data%', listProject.title);
+			var formattedDates = HTMLprojectDates.replace('%data%', listProject.dates);
+			var formattedDescription = HTMLprojectDescription.replace('%data%', listProject.description);
+			var projectImages = listProject.images;
+			var projectURL = listProject.url;
+			var projectTitle = listProject.title
+
+			// Display project
+			$('#projects').append(HTMLprojectStart);
+
+			// Add title
+
+			$('.project-entry:last').append(formattedTitle);
+
+			// Add project dates
+
+			$('.project-entry:last').append(formattedDates);
+
+			//Add project Description
+			$('.project-entry:last').append(formattedDescription);
+
+			//Add project images
+			if ( projectImages.length > 0 ) {
+				for (var image in projectImages ) {
+					var formattedImage = HTMLprojectImage.replace('%data1%', projectImages[image]).replace('%data2%', projectTitle).replace('%data3%', projectImages[image]);
+					$('.project-entry:last').append(formattedImage);
+				}
+			}
+
+			//Add project URL
+			$( '.title-link:last' ).attr( 'href', projectURL );
 		}
 	}
 
