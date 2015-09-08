@@ -1,4 +1,4 @@
-/* DATA */
+/*===== MODEL =====*/
 
 var model = {
 	// Bio and contact information
@@ -120,54 +120,38 @@ var model = {
 		]
 	}
 }
-/* FUNCTIONS */
 
-// Function to display bio information in header and footer
-biodisplay = function(){
-	// Name and role to header
-	var formattedRole = HTMLheaderRole.replace('%data%', model.bio.role);
-	$('header').prepend(formattedRole);
-	var formattedName = HTMLheaderName.replace('%data%', model.bio.name);
-	$('header').prepend(formattedName);
+/*===== Operations =====*/
 
-	//Contact info for header
-	var formattedMobile = HTMLmobile.replace('%data1%', model.bio.contacts.mobile).replace('%data2%', model.bio.contacts.mobile);
-	$('#topContacts').prepend(formattedMobile);
-	var formattedEmail = HTMLemail.replace('%data1%', model.bio.contacts.email).replace('%data2%', model.bio.contacts.email);
-	$('#topContacts').prepend(formattedEmail);
-	var formattedTwitter = HTMLtwitter.replace('%data1%', model.bio.contacts.twitter).replace('%data2%', model.bio.contacts.twitter);
-	$('#topContacts').prepend(formattedTwitter);
-	var formattedGithub = HTMLgithub.replace('%data1%', model.bio.contacts.github).replace('%data2%', model.bio.contacts.github);
-	$('#topContacts').prepend(formattedGithub);
-	var formattedLocation = HTMLlocation.replace('%data%', model.bio.contacts.location);
-	$('#topContacts').prepend(formattedLocation);
+var operations = {
 
-	//Bio Picture
-	var formatteedBioPic = HTMLbioPic.replace('%data%', model.bio.bioPic);
-	$('header').append(formatteedBioPic);
-	var formattedBioPicX = HTMLbioPicX.replace('%data1%', model.bio.bioPic).replace('%data2%', model.bio.bioPic2X); // add  2x Picture
-	$(formattedBioPicX).insertBefore('.biopic');
-	// Welcome message header
-	var formattedWelcomeMsg = HTMLwelcomeMsg.replace('%data%', model.bio.welcomeMsg);
-	$('header').append(formattedWelcomeMsg);
+	init: function() {
+		view.bio();
 
-	//Skills
-	if (model.bio.skills.length > 0 ) {
-		$('header').append(HTMLskillsStart);
-		var formattedSkill;
-		for (var skill in model.bio.skills) {
-			formattedSkill = HTMLskills.replace('%data%', model.bio.skills[skill]);
-			$('#skills').append(formattedSkill);
-		}
+	},
+
+	getBioData: {
+		formattedRole: HTMLheaderRole.replace( '%data%', model.bio.role ),
+		formattedName: HTMLheaderName.replace( '%data%', model.bio.name ),
+		formattedMobile: HTMLmobile.replace( '%data1%', model.bio.contacts.mobile ).replace( '%data2%', model.bio.contacts.mobile ),
+		formattedEmail: HTMLemail.replace( '%data1%', model.bio.contacts.email ).replace( '%data2%', model.bio.contacts.email ),
+
+		formattedTwitter: HTMLtwitter.replace( '%data1%', model.bio.contacts.twitter).replace('%data2%', model.bio.contacts.twitter),
+		formattedGithub: HTMLgithub.replace( '%data1%', model.bio.contacts.github).replace('%data2%', model.bio.contacts.github),
+		formattedLocation: HTMLlocation.replace( '%data%', model.bio.contacts.location ),
+		formattedBioPic: HTMLbioPic.replace( '%data%', model.bio.bioPic ),
+		formattedBioPicX: HTMLbioPicX.replace( '%data1%', model.bio.bioPic ).replace( '%data2%', model.bio.bioPic2X ), // add  2x Picture
+		formattedWelcomeMsg: HTMLwelcomeMsg.replace( '%data%', model.bio.welcomeMsg )
+	},
+
+	getSkills: model.bio.skills,
+
+	getFormattedSkill: function( skill ){
+		return HTMLskills.replace('%data%', model.bio.skills[ skill ] );
 	}
+}
 
-	//Contact info for footer
-	$('#footerContacts').prepend(formattedMobile);
-	$('#footerContacts').prepend(formattedEmail);
-	$('#footerContacts').prepend(formattedTwitter);
-	$('#footerContacts').prepend(formattedGithub);
-	$('#footerContacts').prepend(formattedLocation);
-};
+
 
 // Function to display work experience (adapted to show both paid and volunteer jobs)
 workdisplay = function(jobType) {
@@ -304,8 +288,6 @@ function inName(name) {
 
 /* DISPLAY INFO ON PAGE */
 
-// Display bio information in header and footer
-biodisplay();
 
 // Display jobs and volunteer positions
 workdisplay("jobs");
@@ -317,6 +299,50 @@ projectsdisplay();
 // Display formal education and online coursework
 educationdisplaySchools();
 educationdisplayOnline();
+
+/*===== View =====*/
+
+var view = {
+
+	// Function to display bio information in header and footer
+	bio: function(){
+		// Name and role to header
+		$('header').prepend(operations.getBioData.formattedRole);
+		$('header').prepend(operations.getBioData.formattedName);
+
+		//Contact info for header
+		$('#topContacts').prepend(operations.getBioData.formattedMobile);
+		$('#topContacts').prepend(operations.getBioData.formattedEmail);
+		$('#topContacts').prepend(operations.getBioData.formattedTwitter);
+		$('#topContacts').prepend(operations.getBioData.formattedGithub);
+		$('#topContacts').prepend(operations.getBioData.formattedLocation);
+
+		//Bio Picture
+		$('header').append(operations.getBioData.formattedBioPic);
+		$(operations.getBioData.formattedBioPicX).insertBefore('.biopic');
+
+		// Welcome message header
+		$('header').append(operations.getBioData.formattedWelcomeMsg);
+		//Skills
+
+		if ( operations.getSkills.length > 0 ) {
+			$('header').append(HTMLskillsStart);
+			for ( var i = 0; i < operations.getSkills.length; i++ ) {
+				$('#skills').append( operations.getFormattedSkill( i ) );
+			}
+		}
+
+		//Contact info for footer
+		$('#footerContacts').prepend(operations.getBioData.formattedMobile);
+		$('#footerContacts').prepend(operations.getBioData.formattedEmail);
+		$('#footerContacts').prepend(operations.getBioData.formattedTwitter);
+		$('#footerContacts').prepend(operations.getBioData.formattedGithub);
+		$('#footerContacts').prepend(operations.getBioData.formattedLocation);
+	}
+
+}
+
+operations.init();
 
 // Display Google Map
 $('#mapDiv').append(googleMap);
