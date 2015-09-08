@@ -135,17 +135,16 @@ var operations = {
 	},
 
 	getBioData: {
-		formattedRole: HTMLheaderRole.replace( '%data%', model.bio.role ),
-		formattedName: HTMLheaderName.replace( '%data%', model.bio.name ),
-		formattedMobile: HTMLmobile.replace( '%data1%', model.bio.contacts.mobile ).replace( '%data2%', model.bio.contacts.mobile ),
-		formattedEmail: HTMLemail.replace( '%data1%', model.bio.contacts.email ).replace( '%data2%', model.bio.contacts.email ),
-
-		formattedTwitter: HTMLtwitter.replace( '%data1%', model.bio.contacts.twitter).replace('%data2%', model.bio.contacts.twitter),
-		formattedGithub: HTMLgithub.replace( '%data1%', model.bio.contacts.github).replace('%data2%', model.bio.contacts.github),
-		formattedLocation: HTMLlocation.replace( '%data%', model.bio.contacts.location ),
-		formattedBioPic: HTMLbioPic.replace( '%data%', model.bio.bioPic ),
-		formattedBioPicX: HTMLbioPicX.replace( '%data1%', model.bio.bioPic ).replace( '%data2%', model.bio.bioPic2X ), // add  2x Picture
-		formattedWelcomeMsg: HTMLwelcomeMsg.replace( '%data%', model.bio.welcomeMsg )
+		role: model.bio.role,
+		name: model.bio.name,
+		mobile: model.bio.contacts.mobile,
+		email: model.bio.contacts.email,
+		twitter: model.bio.contacts.twitter,
+		github: model.bio.contacts.github,
+		location: model.bio.contacts.location,
+		bioPic: model.bio.bioPic,
+		bioPicX: model.bio.bioPic2X, //2x Picture
+		welcomeMsg: model.bio.welcomeMsg
 	},
 
 	getSkills: model.bio.skills,
@@ -288,62 +287,80 @@ var view = {
 
 	// Function to display bio information in header and footer
 	bio: function(){
-		// Name and role to header
-		$('header').prepend(operations.getBioData.formattedRole);
-		$('header').prepend(operations.getBioData.formattedName);
 
-		//Contact info for header
-		$('#topContacts').prepend(operations.getBioData.formattedMobile);
-		$('#topContacts').prepend(operations.getBioData.formattedEmail);
-		$('#topContacts').prepend(operations.getBioData.formattedTwitter);
-		$('#topContacts').prepend(operations.getBioData.formattedGithub);
-		$('#topContacts').prepend(operations.getBioData.formattedLocation);
+		//Get data from operations
+		formattedRole =  HTMLheaderRole.replace( '%data%', operations.getBioData.role );
+		formattedName =  HTMLheaderName.replace( '%data%', operations.getBioData.name );
+		formattedMobile =  HTMLmobile.replace( '%data1%', operations.getBioData.mobile ).replace( '%data2%', operations.getBioData.mobile );
+		formattedEmail =  HTMLemail.replace( '%data1%', operations.getBioData.email ).replace( '%data2%', operations.getBioData.email );
+		formattedTwitter =  HTMLtwitter.replace( '%data1%', operations.getBioData.twitter).replace('%data2%', operations.getBioData.twitter);
+		formattedGithub =  HTMLgithub.replace( '%data1%', operations.getBioData.github).replace('%data2%', operations.getBioData.github);
+		formattedLocation =  HTMLlocation.replace( '%data%', operations.getBioData.location );
+		formattedBioPic =  HTMLbioPic.replace( '%data%', operations.getBioData.bioPic );
+		formattedBioPicX =  HTMLbioPicX.replace( '%data1%', operations.getBioData.bioPic ).replace( '%data2%', operations.getBioData.bioPic2X ); // add  2x Picture
+		formattedWelcomeMsg =  HTMLwelcomeMsg.replace( '%data%', operations.getBioData.welcomeMsg );
+		skills = operations.getSkills;
 
-		//Bio Picture
-		$('header').append(operations.getBioData.formattedBioPic);
-		$(operations.getBioData.formattedBioPicX).insertBefore('.biopic');
+		// Add name and role to header
+		$('header').prepend( formattedRole );
+		$('header').prepend( formattedName);
 
-		// Welcome message header
-		$('header').append(operations.getBioData.formattedWelcomeMsg);
-		//Skills
+		//Add contact info for header
+		$('#topContacts').prepend( formattedMobile);
+		$('#topContacts').prepend( formattedEmail);
+		$('#topContacts').prepend( formattedTwitter);
+		$('#topContacts').prepend( formattedGithub);
+		$('#topContacts').prepend( formattedLocation);
 
-		if ( operations.getSkills.length > 0 ) {
+		//Add bio picture
+		$('header').append( formattedBioPic);
+		$( formattedBioPicX).insertBefore('.biopic');
+
+		//Add welcome message
+		$('header').append( formattedWelcomeMsg);
+
+		//Add skills
+		if ( skills.length > 0 ) {
 			$('header').append(HTMLskillsStart);
-			for ( var i = 0; i < operations.getSkills.length; i++ ) {
-				$('#skills').append( operations.getFormattedSkill( i ) );
+			for ( var i = 0; i < skills.length; i++ ) {
+				formattedHTMLskill = HTMLskills.replace( '%data%', skills[ i ] );
+				$('#skills').append( fromattedHTMLskill );
 			}
 		}
 
-		//Contact info for footer
-		$('#footerContacts').prepend(operations.getBioData.formattedMobile);
-		$('#footerContacts').prepend(operations.getBioData.formattedEmail);
-		$('#footerContacts').prepend(operations.getBioData.formattedTwitter);
-		$('#footerContacts').prepend(operations.getBioData.formattedGithub);
-		$('#footerContacts').prepend(operations.getBioData.formattedLocation);
+		//Add contact info for footer
+		$('#footerContacts').prepend( formattedMobile);
+		$('#footerContacts').prepend( formattedEmail);
+		$('#footerContacts').prepend( formattedTwitter);
+		$('#footerContacts').prepend( formattedGithub);
+		$('#footerContacts').prepend( formattedLocation);
 	},
 
 	// Function to display work experience (adapted to show both paid and volunteer jobs)
 	work: function(jobType) {
 		for (var job in model.work[jobType] ) {
 
+			//Get data from operations
+			var formattedEmployer = HTMLworkEmployer.replace('%data%', operations.getJob( jobType, job ).employer);
+			var formattedTitle = HTMLworkTitle.replace('%data%', operations.getJob( jobType, job ).title);
+			var formattedDates = HTMLworkDates.replace('%data%', operations.getJob( jobType, job ).dates);
+			var formattedDates = HTMLworkDates.replace('%data%', operations.getJob( jobType, job ).dates);
+			var formattedLocation = HTMLworkLocation.replace('%data%', operations.getJob( jobType, job ).location);
+			var formattedDescription = HTMLworkDescription.replace('%data%', operations.getJob( jobType, job ).description);
+
 			// Start job listing
 			$( operations.getExperienceType( jobType ) ).append( HTMLworkStart );
 
-			//Employer and title
-			var formattedEmployer = HTMLworkEmployer.replace('%data%', operations.getJob( jobType, job ).employer);
-			var formattedTitle = HTMLworkTitle.replace('%data%', operations.getJob( jobType, job ).title);
+			//Add employer and title
 			$('.work-entry:last').append(formattedEmployer + formattedTitle);
 
-			// Dates
-			var formattedDates = HTMLworkDates.replace('%data%', operations.getJob( jobType, job ).dates);
+			//Add work dates
 			$('.work-entry:last').append(formattedDates);
 
-			// Location
-			var formattedLocation = HTMLworkLocation.replace('%data%', operations.getJob( jobType, job ).location);
+			//Add work location
 			$('.work-entry:last').append(formattedLocation);
 
-			//Description
-			var formattedDescription = HTMLworkDescription.replace('%data%', operations.getJob( jobType, job ).description);
+			//Add job description
 			$('.work-entry:last').append(formattedDescription);
 		}
 	}
