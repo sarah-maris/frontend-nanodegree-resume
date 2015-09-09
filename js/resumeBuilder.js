@@ -114,7 +114,7 @@ var model = {
 				"school" : "Udacity",
 				"dates" : "May 2015 - present",
 				"url" : "http://www.udacity.com/course/front-end-web-developer-nanodegree--nd001",
-				"schoolurl" : "http://www.udacity.com"
+				"schoolUrl" : "http://www.udacity.com"
 			}
 		]
 	}
@@ -130,6 +130,7 @@ var operations = {
 			view.work( jobType );
 		}
 		view.projects();
+		view.education();
 
 
 	},
@@ -154,70 +155,30 @@ var operations = {
 		else { return '#volunteerExperience'; }
 	},
 
+	getJobs: function( jobType ) {
+		return model.work[ jobType ];
+	},
+
 	getJob: function( jobType, job ) {
 		return model.work[ jobType ][ job ];
 	},
 
 	getProjects: model.projects,
 
+	getSchools: model.education,
+
+	getSchoolTypes: function( schoolType ) {
+		return model.education[ schoolType ];
+	},
+
+	getSchool: function( schoolType, school) {
+		return model.education[ schoolType ][ school ];
+	}
+
 }
 
 
 
-
-
-
-
-// Function to display formal education
-educationdisplaySchools = function(){
-	for (var school in model.education.schools) {
-		//Start school section
-		$('#education').append(HTMLschoolStart);
-
-		//Name and degree
-		var formattedName = HTMLschoolName.replace('%data%', model.education.schools[school].name);
-		var formattedDegree = HTMLschoolDegree.replace('%data%', model.education.schools[school].degree);
-		$('.education-entry:last').append(formattedName + formattedDegree);
-
-		//Dates, location and major
-		var formattedDates = HTMLschoolDates.replace('%data%', model.education.schools[school].dates);
-		$('.education-entry:last').append(formattedDates);
-		var formattedLocation = HTMLschoolLocation.replace('%data%', model.education.schools[school].location);
-		$('.education-entry:last').append(formattedLocation);
-		var formattedMajor = HTMLschoolMajor.replace('%data%', model.education.schools[school].majors);
-		$('.education-entry:last').append(formattedMajor);
-
-		//School URL
-		$('.title-link:last').attr('href',model.education.schools[school].url);
-	}
-};
-
-// Function to display online coursework
-educationdisplayOnline = function(){
-	// Add section header
-	$('#education').append(HTMLonlineClasses);
-
-	for (var course in model.education.onlineCourses) {
-
-		//Start online course section
-		$('#education').append(HTMLschoolStart);
-
-		//Name and degree
-		var formattedTitle = HTMLonlineTitle.replace('%data%', model.education.onlineCourses[course].title);
-		var formattedSchool = HTMLonlineSchool.replace('%data%', model.education.onlineCourses[course].school);
-		$('.education-entry:last').append(formattedTitle + formattedSchool);
-
-		//Dates and URL
-		var formattedDates = HTMLonlineDates.replace('%data%', model.education.onlineCourses[course].dates);
-		$('.education-entry:last').append(formattedDates);
-		var formattedLocation = HTMLonlineURL.replace('%data%', model.education.onlineCourses[course].url);
-		$('.education-entry:last').append(formattedLocation);
-		$('a:last').attr('href',model.education.onlineCourses[course].url);
-
-		//School URL
-		$('.title-link:last').attr('href',model.education.onlineCourses[course].schoolurl);
-	}
-};
 
 // Function to pull locations from work and education data
 function locationizer(work_obj) {
@@ -239,11 +200,8 @@ function inName(name) {
 	return (firstName + " " + lastName);
 }
 
-/* DISPLAY INFO ON PAGE */
 
-// Display formal education and online coursework
-educationdisplaySchools();
-educationdisplayOnline();
+
 
 /*===== View =====*/
 
@@ -301,8 +259,9 @@ var view = {
 	},
 
 	// Function to display work experience (adapted to show both paid and volunteer jobs)
-	work: function(jobType) {
-		for (var job in model.work[jobType] ) {
+	work: function( jobType ) {
+		var jobs = operations.getJobs( jobType );
+		for (var job in jobs ) {
 
 			//Get data from operations
 			var formattedEmployer = HTMLworkEmployer.replace('%data%', operations.getJob( jobType, job ).employer);
@@ -366,6 +325,65 @@ var view = {
 
 			//Add project URL
 			$( '.title-link:last' ).attr( 'href', projectURL );
+		}
+	},
+
+	// Function to display online courses and other schools
+	education: function(){
+
+		//Get data from operations
+		for ( var schoolType in operations.getSchools ) {
+
+			// Add section header for online Courses
+			if ( schoolType === "onlineCourses" ) {
+				$( '#education' ).append( HTMLonlineClasses );
+			}
+
+			//Get data for each school
+			for ( var school in operations.getSchoolTypes( schoolType ) ) {
+				var school = operations.getSchool( schoolType, school );
+				var formattedName = HTMLschoolName.replace( '%data%', school.name );
+				var formattedDegree = HTMLschoolDegree.replace( '%data%', school.degree );
+				var formattedTitle = HTMLonlineTitle.replace( '%data%', school.title );
+				var formattedSchool = HTMLonlineSchool.replace( '%data%', school.school );
+				var formattedDates = HTMLschoolDates.replace( '%data%', school.dates );
+				var formattedLocation = HTMLschoolLocation.replace( '%data%', school.location );
+				var formattedMajor = HTMLschoolMajor.replace( '%data%', school.majors );
+				var formattedSchoolUrl = HTMLonlineURL.replace('%data%', school.schoolUrl);
+				var url = school.url;
+				var schoolUrl = school.schoolUrl;
+
+				//Start school section
+				$( '#education' ).append( HTMLschoolStart );
+
+				//Name and degree
+				if ( schoolType === "schools" ) {
+					$( '.education-entry:last' ).append( formattedName + formattedDegree );
+				}
+
+				//Online course title and school
+				if ( schoolType === "onlineCourses" ) {
+					$( '.education-entry:last' ).append( formattedTitle + formattedSchool );
+				}
+
+				//Dates attended
+				$( '.education-entry:last' ).append( formattedDates );
+
+				//Location and major
+				if ( schoolType === "schools" ) {
+					$( '.education-entry:last' ).append( formattedLocation );
+					$( '.education-entry:last' ).append( formattedMajor );
+				}
+
+				//Course and url
+				if ( schoolType === "onlineCourses" ) {
+					$('.education-entry:last').append(formattedSchoolUrl);
+					$('a:last').attr( 'href', schoolUrl )
+				}
+
+				//Add link to school name
+				$('.title-link:last').attr('href', url);
+			}
 		}
 	}
 
