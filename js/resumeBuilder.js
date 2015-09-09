@@ -131,7 +131,7 @@ var operations = {
 		}
 		view.projects();
 		view.education();
-
+		view.internationalize();
 
 	},
 
@@ -173,7 +173,16 @@ var operations = {
 
 	getSchool: function( schoolType, school) {
 		return model.education[ schoolType ][ school ];
-	}
+	},
+	
+	// Function to convert name to International FORMAT)
+	inName: function (name) {
+		var splitName = name.trim().split(" ");
+		var firstName = splitName[0].slice(0,1).toUpperCase() + splitName[0].slice(1).toLowerCase();
+		var lastName = splitName[1].toUpperCase();
+	return (firstName + " " + lastName);
+}
+
 
 }
 
@@ -192,13 +201,6 @@ function locationizer(work_obj) {
 	return locations;
 }
 
-// Function to convert name to International FORMAT)
-function inName(name) {
-	var splitName = name.trim().split(" ");
-	var firstName = splitName[0].slice(0,1).toUpperCase() + splitName[0].slice(1).toLowerCase();
-	var lastName = splitName[1].toUpperCase();
-	return (firstName + " " + lastName);
-}
 
 
 
@@ -385,6 +387,11 @@ var view = {
 				$('.title-link:last').attr('href', url);
 			}
 		}
+	}, 
+	
+	internationalize: function() {
+		// Add button to internationalize name
+		$('#main').append(internationalizeButton);
 	}
 
 }
@@ -394,5 +401,4 @@ operations.init();
 // Display Google Map
 $('#mapDiv').append(googleMap);
 
-// Add button to internationalize name
-$('#main').append(internationalizeButton);
+

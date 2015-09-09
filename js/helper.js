@@ -51,7 +51,7 @@ var googleMap = '<article id="map"></article>';
 // jQuery to call internationalize function
 $(document).ready(function() {
   $('button').click(function() {
-    var iName = inName(bio.name) || function(){};
+    var iName = operations.inName( operations.getBioData.name) || function(){};
     $('#name').html(iName);
   });
 });
