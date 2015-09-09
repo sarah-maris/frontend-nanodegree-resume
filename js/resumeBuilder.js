@@ -118,7 +118,7 @@ var model = {
 			}
 		]
 	}
-}
+};
 
 /*===== Operations =====*/
 
@@ -126,12 +126,13 @@ var operations = {
 
 	init: function() {
 		view.bio();
-		for ( jobType in model.work ) {
+		for ( var jobType in model.work ) {
 			view.work( jobType );
 		}
 		view.projects();
 		view.education();
 		view.internationalize();
+		view.addMap();
 
 	},
 
@@ -174,36 +175,15 @@ var operations = {
 	getSchool: function( schoolType, school) {
 		return model.education[ schoolType ][ school ];
 	},
-	
+
 	// Function to convert name to International FORMAT)
 	inName: function (name) {
 		var splitName = name.trim().split(" ");
 		var firstName = splitName[0].slice(0,1).toUpperCase() + splitName[0].slice(1).toLowerCase();
 		var lastName = splitName[1].toUpperCase();
-	return (firstName + " " + lastName);
-}
-
-
-}
-
-
-
-
-// Function to pull locations from work and education data
-function locationizer(work_obj) {
-	var locations = [];
-	// Add loop for different job types
-	for (var jobType in work_obj ) {
-		for (var job in work_obj[jobType]) {
-			locations.push(work_obj[jobType][job].location);
-		}
+		return (firstName + " " + lastName);
 	}
-	return locations;
-}
-
-
-
-
+};
 
 /*===== View =====*/
 
@@ -269,7 +249,6 @@ var view = {
 			var formattedEmployer = HTMLworkEmployer.replace('%data%', operations.getJob( jobType, job ).employer);
 			var formattedTitle = HTMLworkTitle.replace('%data%', operations.getJob( jobType, job ).title);
 			var formattedDates = HTMLworkDates.replace('%data%', operations.getJob( jobType, job ).dates);
-			var formattedDates = HTMLworkDates.replace('%data%', operations.getJob( jobType, job ).dates);
 			var formattedLocation = HTMLworkLocation.replace('%data%', operations.getJob( jobType, job ).location);
 			var formattedDescription = HTMLworkDescription.replace('%data%', operations.getJob( jobType, job ).description);
 
@@ -301,17 +280,15 @@ var view = {
 			var formattedDescription = HTMLprojectDescription.replace('%data%', listProject.description);
 			var projectImages = listProject.images;
 			var projectURL = listProject.url;
-			var projectTitle = listProject.title
+			var projectTitle = listProject.title;
 
 			// Display project
 			$('#projects').append(HTMLprojectStart);
 
 			// Add title
-
 			$('.project-entry:last').append(formattedTitle);
 
 			// Add project dates
-
 			$('.project-entry:last').append(formattedDates);
 
 			//Add project Description
@@ -342,8 +319,8 @@ var view = {
 			}
 
 			//Get data for each school
-			for ( var school in operations.getSchoolTypes( schoolType ) ) {
-				var school = operations.getSchool( schoolType, school );
+			for ( var sch in operations.getSchoolTypes( schoolType ) ) {
+				var school = operations.getSchool( schoolType, sch );
 				var formattedName = HTMLschoolName.replace( '%data%', school.name );
 				var formattedDegree = HTMLschoolDegree.replace( '%data%', school.degree );
 				var formattedTitle = HTMLonlineTitle.replace( '%data%', school.title );
@@ -380,25 +357,25 @@ var view = {
 				//Course and url
 				if ( schoolType === "onlineCourses" ) {
 					$('.education-entry:last').append(formattedSchoolUrl);
-					$('a:last').attr( 'href', schoolUrl )
+					$('a:last').attr( 'href', schoolUrl );
 				}
 
 				//Add link to school name
 				$('.title-link:last').attr('href', url);
 			}
 		}
-	}, 
-	
+	},
+
 	internationalize: function() {
 		// Add button to internationalize name
 		$('#main').append(internationalizeButton);
+	},
+
+	addMap: function() {
+		// Display Google Map
+		$('#mapDiv').append(googleMap);
 	}
 
-}
+};
 
 operations.init();
-
-// Display Google Map
-$('#mapDiv').append(googleMap);
-
-
