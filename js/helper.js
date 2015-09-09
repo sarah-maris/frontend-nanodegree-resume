@@ -48,6 +48,7 @@ var internationalizeButton = '<button>Internationalize</button>';
 var googleMap = '<article id="map"></article>';
 
 
+
 // jQuery to call internationalize function
 $(document).ready(function() {
   $('button').click(function() {
@@ -101,8 +102,8 @@ function initializeMap() {
 	// Add zoom control
 	zoomControl: true,
     zoomControlOptions: {
-      style: google.maps.ZoomControlStyle.SMALL,
-	  position: google.maps.ControlPosition.BOTTOM_LEFT
+		style: google.maps.ZoomControlStyle.SMALL,
+		position: google.maps.ControlPosition.BOTTOM_LEFT
     }
   };
 
@@ -162,7 +163,7 @@ function initializeMap() {
 
 	//add info window
     google.maps.event.addListener(marker, 'click', function() {
-	  infoWindow.open(map,marker);
+		infoWindow.open(map,marker);
     });
 
     // add pin to the map.
