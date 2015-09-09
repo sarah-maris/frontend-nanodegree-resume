@@ -42,7 +42,7 @@ var HTMLonlineClasses = '<h3 id="online-courses">Online Classes</h3>';
 var HTMLonlineTitle = '<a class="title-link" href="#" target="_blank">%data%'; // open link in new tab
 var HTMLonlineSchool = ' - %data%</a>';
 var HTMLonlineDates = '<div class="date-text">%data%</div>';
-var HTMLonlineURL = '<br><a class="course-link" href="#">%data%</a>';
+var HTMLonlineURL = '<br><a class="course-link" href="#" target="_blank">%data%</a>';
 
 var internationalizeButton = '<button>Internationalize</button>';
 var googleMap = '<article id="map"></article>';
